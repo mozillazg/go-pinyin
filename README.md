@@ -1,6 +1,8 @@
 go-pinyin
 =========
 
+[![Build Status](https://travis-ci.org/mozillazg/go-pinyin.svg)](https://travis-ci.org/mozillazg/go-pinyin)
+
 汉语拼音转换工具 Go 版。
 
 

@@ -1,0 +1,12 @@
+language: go
+install:
+  - go get github.com/mozillazg/go-pinyin
+  - go get github.com/mozillazg/go-pinyin/pinyin
+
+script:
+  - "$GOPATH/bin/pinyin"
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
