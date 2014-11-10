@@ -4,7 +4,7 @@ install:
   - go get github.com/mozillazg/go-pinyin/pinyin
 
 script:
-  - "$GOPATH/bin/pinyin"
+  - pinyin
 
 notifications:
   email:
