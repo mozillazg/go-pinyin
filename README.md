@@ -2,6 +2,7 @@ go-pinyin
 =========
 
 [![Build Status](https://travis-ci.org/mozillazg/go-pinyin.svg)](https://travis-ci.org/mozillazg/go-pinyin)
+[![GoDoc](https://godoc.org/github.com/mozillazg/go-pinyin?status.svg)](https://godoc.org/github.com/mozillazg/go-pinyin)
 
 汉语拼音转换工具 Go 版。
 
@@ -10,13 +11,13 @@ Installation
 ------------
 
 ```
-go get github.com/mozillazg/go-pinyin
+go get -u github.com/mozillazg/go-pinyin
 ```
 
 install CLI tool:
 
 ```
-go get github.com/mozillazg/go-pinyin/pinyin
+go get -u github.com/mozillazg/go-pinyin/pinyin
 pinyin --help
 ```
 
