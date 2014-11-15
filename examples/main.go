@@ -50,4 +50,7 @@ func main() {
 	fmt.Println("LazyPinyin default: ",
 		pinyin.LazyPinyin(hans, pinyin.Args{}),
 	)
+	fmt.Println("Slug default: ",
+		pinyin.Slug(hans, pinyin.Args{}),
+	)
 }
