@@ -14,13 +14,6 @@ Installation
 go get -u github.com/mozillazg/go-pinyin
 ```
 
-install CLI tool:
-
-```
-go get -u github.com/mozillazg/go-pinyin/pinyin
-pinyin --help
-```
-
 Usage
 ------
 
