@@ -47,8 +47,9 @@ var re_PHONETIC_SYMBOL = regexp.MustCompile("[" + rePhoneticSymbolSource + "]")
 var re_TONE2 = regexp.MustCompile("([aeoiuvnm])([0-4])$")
 
 type Args struct {
-	Style     int  // 拼音风格
-	Heteronym bool // 是否启用多音字模式
+	Style     int    // 拼音风格（默认： NORMAL)
+	Heteronym bool   // 是否启用多音字模式（默认：禁用）
+	Separator string // Slug 中使用的分隔符（默认：-)
 }
 
 // 获取单个拼音中的声母
@@ -134,4 +135,21 @@ func Pinyin(s string, a Args) [][]string {
 		pys = append(pys, SinglePinyin(r, a))
 	}
 	return pys
+}
+
+func LazyPinyin(s string, a Args) []string {
+	a.Heteronym = false
+	pys := []string{}
+	for _, v := range Pinyin(s, a) {
+		pys = append(pys, v[0])
+	}
+	return pys
+}
+
+func Slug(s string, a Args) string {
+	separator := "-"
+	if a.Separator != "" {
+		separator = a.Separator
+	}
+	return strings.Join(LazyPinyin(s, a), separator)
 }
