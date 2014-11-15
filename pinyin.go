@@ -5,6 +5,14 @@ import (
 	"strings"
 )
 
+// Meta
+const (
+	Version   = "0.1.0"
+	Author    = "mozillazg, 闲耘"
+	License   = "MIT"
+	Copyright = "Copyright (c) 2014 mozillazg, 闲耘"
+)
+
 // 拼音风格
 const (
 	NORMAL       = 0 // 普通风格，不带声调（默认风格）。如： pin yin
