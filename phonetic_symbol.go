@@ -1,7 +1,7 @@
 package pinyin
 
 // 带音标字符。
-var PhoneticSymbol = map[string]string{
+var phoneticSymbol = map[string]string{
 	"ā": "a1",
 	"á": "a2",
 	"ǎ": "a3",

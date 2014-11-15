@@ -30,7 +30,7 @@ var rePhoneticSymbolSource = func(m map[string]string) string {
 		s = s + k
 	}
 	return s
-}(PhoneticSymbol)
+}(phoneticSymbol)
 
 // 匹配带声调字符的正则表达式
 var re_PHONETIC_SYMBOL = regexp.MustCompile("[" + rePhoneticSymbolSource + "]")
@@ -72,7 +72,7 @@ func toFixed(p string, a Args) string {
 
 	// 替换拼音中的带声调字符
 	py := re_PHONETIC_SYMBOL.ReplaceAllStringFunc(p, func(m string) string {
-		symbol, _ := PhoneticSymbol[m]
+		symbol, _ := phoneticSymbol[m]
 		switch a.Style {
 		// 不包含声调
 		case NORMAL, FIRST_LETTER, FINALS:
