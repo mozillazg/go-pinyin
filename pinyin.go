@@ -5,10 +5,18 @@ import (
 	"strings"
 )
 
+// Meta
+const (
+	Version   = "0.1.0"
+	Author    = "mozillazg, 闲耘"
+	License   = "MIT"
+	Copyright = "Copyright (c) 2014 mozillazg, 闲耘"
+)
+
 // 拼音风格
 const (
-	NORMAL       = 0 // 普通风格，不带声调。如： pin yin
-	TONE         = 1 // 声调风格1，拼音声调在韵母第一个字母上（默认风格）。如： pīn yīn
+	NORMAL       = 0 // 普通风格，不带声调（默认风格）。如： pin yin
+	TONE         = 1 // 声调风格1，拼音声调在韵母第一个字母上。如： pīn yīn
 	TONE2        = 2 // 声调风格2，即拼音声调在各个拼音之后，用数字 [0-4] 进行表示。如： pi1n yi1n
 	INITIALS     = 3 // 声母风格，只返回各个拼音的声母部分。如： 中国 的拼音 zh g
 	FIRST_LETTER = 4 // 首字母风格，只返回拼音的首字母部分。如： p y
@@ -30,7 +38,7 @@ var rePhoneticSymbolSource = func(m map[string]string) string {
 		s = s + k
 	}
 	return s
-}(PhoneticSymbol)
+}(phoneticSymbol)
 
 // 匹配带声调字符的正则表达式
 var re_PHONETIC_SYMBOL = regexp.MustCompile("[" + rePhoneticSymbolSource + "]")
@@ -72,7 +80,7 @@ func toFixed(p string, a Args) string {
 
 	// 替换拼音中的带声调字符
 	py := re_PHONETIC_SYMBOL.ReplaceAllStringFunc(p, func(m string) string {
-		symbol, _ := PhoneticSymbol[m]
+		symbol, _ := phoneticSymbol[m]
 		switch a.Style {
 		// 不包含声调
 		case NORMAL, FIRST_LETTER, FINALS:
