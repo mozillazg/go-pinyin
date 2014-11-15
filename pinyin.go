@@ -135,3 +135,12 @@ func Pinyin(s string, a Args) [][]string {
 	}
 	return pys
 }
+
+func LazyPinyin(s string, a Args) []string {
+	a.Heteronym = false
+	pys := []string{}
+	for _, v := range Pinyin(s, a) {
+		pys = append(pys, v[0])
+	}
+	return pys
+}

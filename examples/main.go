@@ -47,4 +47,7 @@ func main() {
 			Style: pinyin.TONE2},
 		),
 	)
+	fmt.Println("LazyPinyin default: ",
+		pinyin.LazyPinyin(hans, pinyin.Args{}),
+	)
 }
