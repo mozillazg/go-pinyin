@@ -42,4 +42,9 @@ func main() {
 			Style: pinyin.INITIALS},
 		),
 	)
+	fmt.Println("Heteronym true TONE2: ",
+		pinyin.Pinyin(hans, pinyin.Args{Heteronym: true,
+			Style: pinyin.TONE2},
+		),
+	)
 }
