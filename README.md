@@ -40,3 +40,10 @@ func main() {
 	fmt.Println(pinyin.Pinyin(hans, pinyin.Args{Heteronym: true}))
 }
 ```
+
+
+Related Projects
+-----------------
+
+* [hotoo/pinyin](https://github.com/hotoo/pinyin): 汉语拼音转换工具 Node.js/JavaScript 版。
+* [mozillazg/python-pinyin](https://github.com/mozillazg/python-pinyin): 汉语拼音转换工具 Python 版。
