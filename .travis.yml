@@ -3,15 +3,19 @@ go:
   - 1.2
   - 1.3
   - tip
-install:
-  - go get code.google.com/p/go.tools/cmd/cover
+
+before_install:
+  - go get github.com/axw/gocov/gocov
   - go get github.com/mattn/goveralls
+  - go get golang.org/x/tools/cmd/cover
+install:
   - go get github.com/mozillazg/go-pinyin
   - go get github.com/mozillazg/go-pinyin/pinyin
 
 script:
   - pinyin
-  - $(go env GOPATH | awk 'BEGIN{FS=":"} {print $1}')/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
+  - go test -v -covermode=count -coverprofile=coverage.out
+  - $(go env GOPATH | awk 'BEGIN{FS=":"} {print $1}')/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken WAzmh3gmiQEUYEHM2wkwSH4oTrshvMmll
 
 notifications:
   email:
