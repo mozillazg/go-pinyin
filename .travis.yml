@@ -5,9 +5,11 @@ go:
   - tip
 
 before_install:
+  # - go get golang.org/x/tools/cmd/cover
+  - go get code.google.com/p/go.tools/cmd/cover
   - go get github.com/axw/gocov/gocov
   - go get github.com/mattn/goveralls
-  - go get golang.org/x/tools/cmd/cover
+
 install:
   - go get github.com/mozillazg/go-pinyin
   - go get github.com/mozillazg/go-pinyin/pinyin
