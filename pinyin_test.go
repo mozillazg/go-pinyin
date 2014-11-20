@@ -7,7 +7,7 @@ import (
 
 type pinyinFunc func(string, Args) [][]string
 
-func suite(s string, d map[Args][][]string, f pinyinFunc) (t *testing.T) {
+func testPinyin(s string, d map[Args][][]string, f pinyinFunc) (t *testing.T) {
 	for a := range d {
 		value, _ := d[a]
 		v := f(s, a)
@@ -73,7 +73,7 @@ func TestPinyin(t *testing.T) {
 		},
 	}
 
-	suite(hans, test_data, Pinyin)
+	testPinyin(hans, test_data, Pinyin)
 }
 
 func TestLazyPinyin(t *testing.T) {
@@ -89,6 +89,20 @@ func TestSlug(t *testing.T) {
 	s := "中国人"
 	v := Slug(s, Args{})
 	value := "zhong-guo-ren"
+	if v != value {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+
+	v = Slug(s, Args{Separator: ","})
+	value = "zhong,guo,ren"
+	if v != value {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+}
+
+func TestFinal(t *testing.T) {
+	value := "an"
+	v := final("an")
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
