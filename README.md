@@ -1,7 +1,8 @@
 go-pinyin
 =========
 
-[![Build Status](https://travis-ci.org/mozillazg/go-pinyin.svg)](https://travis-ci.org/mozillazg/go-pinyin)
+[![Build Status](https://travis-ci.org/mozillazg/go-pinyin.svg?branch=master)](https://travis-ci.org/mozillazg/go-pinyin)
+[![Coverage Status](https://coveralls.io/repos/mozillazg/go-pinyin/badge.png?branch=master)](https://coveralls.io/r/mozillazg/go-pinyin?branch=master)
 [![GoDoc](https://godoc.org/github.com/mozillazg/go-pinyin?status.svg)](https://godoc.org/github.com/mozillazg/go-pinyin)
 
 汉语拼音转换工具 Go 版。
@@ -12,6 +13,14 @@ Installation
 
 ```
 go get -u github.com/mozillazg/go-pinyin
+```
+
+install CLI tool:
+
+```
+go get -u github.com/mozillazg/go-pinyin/pinyin
+$ pinyin 中国人
+zhōng guó rén
 ```
 
 Usage
