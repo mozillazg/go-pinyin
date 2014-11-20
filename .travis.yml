@@ -14,7 +14,7 @@ install:
   - go get github.com/mozillazg/go-pinyin/pinyin
 
 script:
-  - pinyin 中国人
+  - pinyin abc
   - go test -v -covermode=count -coverprofile=coverage.out
   - $(go env GOPATH | awk 'BEGIN{FS=":"} {print $1}')/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken WAzmh3gmiQEUYEHM2wkwSH4oTrshvMmll
 
