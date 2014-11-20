@@ -19,7 +19,8 @@ install CLI tool:
 
 ```
 go get -u github.com/mozillazg/go-pinyin/pinyin
-pinyin --help
+$ pinyin 中国人
+zhōng guó rén
 ```
 
 Usage

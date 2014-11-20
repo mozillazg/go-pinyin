@@ -76,6 +76,15 @@ func TestPinyin(t *testing.T) {
 	testPinyin(hans, test_data, Pinyin)
 }
 
+func TestNoneHans(t *testing.T) {
+	s := "abc"
+	v := Pinyin(s, Args{})
+	value := [][]string{[]string{}, []string{}, []string{}}
+	if !reflect.DeepEqual(v, value) {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+}
+
 func TestLazyPinyin(t *testing.T) {
 	s := "中国人"
 	v := LazyPinyin(s, Args{})

@@ -1,45 +1,31 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"github.com/mozillazg/go-pinyin"
+	"os"
+	"strings"
 )
+import "github.com/mozillazg/go-pinyin"
 
 func main() {
-	hans := "中国人"
-	fmt.Println("default: ",
-		pinyin.Pinyin(hans, pinyin.Args{}),
-	)
-	fmt.Println("NORMAL: ",
-		pinyin.Pinyin(hans, pinyin.Args{Style: pinyin.NORMAL}),
-	)
-	fmt.Println("TONE: ",
-		pinyin.Pinyin(hans, pinyin.Args{Style: pinyin.TONE}),
-	)
-	fmt.Println("TONE2: ",
-		pinyin.Pinyin(hans, pinyin.Args{Style: pinyin.TONE2}),
-	)
-	fmt.Println("INITIALS: ",
-		pinyin.Pinyin(hans, pinyin.Args{Style: pinyin.INITIALS}),
-	)
-	fmt.Println("FIRST_LETTER: ",
-		pinyin.Pinyin(hans, pinyin.Args{Style: pinyin.FIRST_LETTER}),
-	)
-	fmt.Println("FINALS: ",
-		pinyin.Pinyin(hans, pinyin.Args{Style: pinyin.FINALS}),
-	)
-	fmt.Println("FINALS_TONE: ",
-		pinyin.Pinyin(hans, pinyin.Args{Style: pinyin.FINALS_TONE}),
-	)
-	fmt.Println("FINALS_TONE2: ",
-		pinyin.Pinyin(hans, pinyin.Args{Style: pinyin.FINALS_TONE2}),
-	)
-	fmt.Println("Heteronym true: ",
-		pinyin.Pinyin(hans, pinyin.Args{Heteronym: true}),
-	)
-	fmt.Println("Heteronym true INITIALS: ",
-		pinyin.Pinyin(hans, pinyin.Args{Heteronym: true,
-			Style: pinyin.INITIALS},
-		),
-	)
+	heteronym := flag.Bool("e", false, "启用多音字模式")
+	flag.Parse()
+	hans := flag.Args()
+	args := pinyin.Args{Style: pinyin.TONE}
+
+	if len(hans) == 0 {
+		fmt.Println("请至少输入一个汉字: pinyin hans [hans ...]")
+		os.Exit(1)
+	}
+	if *heteronym {
+		args.Heteronym = true
+	}
+	pys := pinyin.Pinyin(strings.Join(hans, ""), args)
+	for _, s := range pys {
+		fmt.Print(strings.Join(s, ","), " ")
+	}
+	if len(pys) > 0 {
+		fmt.Println()
+	}
 }
