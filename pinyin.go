@@ -52,6 +52,14 @@ type Args struct {
 	Separator string // Slug 中使用的分隔符（默认：-)
 }
 
+var Style int = NORMAL
+var Heteronym bool = false
+var Separator string = "-"
+
+func NewArgs() *Args {
+	return &Args{Style, Heteronym, Separator}
+}
+
 // 获取单个拼音中的声母
 func initial(p string) string {
 	s := ""
@@ -74,7 +82,7 @@ func final(p string) string {
 	}
 }
 
-func toFixed(p string, a Args) string {
+func toFixed(p string, a *Args) string {
 	if a.Style == INITIALS {
 		return initial(p)
 	}
@@ -107,7 +115,7 @@ func toFixed(p string, a Args) string {
 	return py
 }
 
-func applyStyle(p []string, a Args) []string {
+func applyStyle(p []string, a *Args) []string {
 	newP := []string{}
 	for _, v := range p {
 		newP = append(newP, toFixed(v, a))
@@ -115,7 +123,7 @@ func applyStyle(p []string, a Args) []string {
 	return newP
 }
 
-func SinglePinyin(r rune, a Args) []string {
+func SinglePinyin(r rune, a *Args) []string {
 	value, ok := PinyinDict[int(r)]
 	pys := []string{}
 	if ok {
@@ -128,7 +136,7 @@ func SinglePinyin(r rune, a Args) []string {
 	return applyStyle(pys, a)
 }
 
-func Pinyin(s string, a Args) [][]string {
+func Pinyin(s string, a *Args) [][]string {
 	hans := []rune(s)
 	pys := [][]string{}
 	for _, r := range hans {
@@ -137,7 +145,7 @@ func Pinyin(s string, a Args) [][]string {
 	return pys
 }
 
-func LazyPinyin(s string, a Args) []string {
+func LazyPinyin(s string, a *Args) []string {
 	a.Heteronym = false
 	pys := []string{}
 	for _, v := range Pinyin(s, a) {
@@ -146,10 +154,7 @@ func LazyPinyin(s string, a Args) []string {
 	return pys
 }
 
-func Slug(s string, a Args) string {
-	separator := "-"
-	if a.Separator != "" {
-		separator = a.Separator
-	}
+func Slug(s string, a *Args) string {
+	separator := a.Separator
 	return strings.Join(LazyPinyin(s, a), separator)
 }
