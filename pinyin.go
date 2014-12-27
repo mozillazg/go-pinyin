@@ -56,7 +56,7 @@ type Args struct {
 // 默认配置：风格
 var Style = Normal
 
-// 默认配置：时候启用多音字模式
+// 默认配置：是否启用多音字模式
 var Heteronym = false
 
 // 默认配置： `Slug` 中 Join 所用的分隔符
