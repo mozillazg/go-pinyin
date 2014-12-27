@@ -26,7 +26,7 @@ const (
 )
 
 // 声母表
-var _Initials = strings.Split(
+var initials = strings.Split(
 	"zh,ch,sh,b,p,m,f,d,t,n,l,g,k,h,j,q,x,r,z,c,s,yu,y,w",
 	",",
 )
@@ -41,10 +41,10 @@ var rePhoneticSymbolSource = func(m map[string]string) string {
 }(phoneticSymbol)
 
 // 匹配带声调字符的正则表达式
-var re_PHONETIC_SYMBOL = regexp.MustCompile("[" + rePhoneticSymbolSource + "]")
+var rePhoneticSymbol = regexp.MustCompile("[" + rePhoneticSymbolSource + "]")
 
 // 匹配使用数字标识声调的字符的正则表达式
-var re_Tone2 = regexp.MustCompile("([aeoiuvnm])([0-4])$")
+var reTone2 = regexp.MustCompile("([aeoiuvnm])([0-4])$")
 
 // Args 配置信息
 type Args struct {
@@ -53,9 +53,14 @@ type Args struct {
 	Separator string // Slug 中使用的分隔符（默认：-)
 }
 
-var Style int = Normal     // 默认配置：风格
-var Heteronym bool = false // 默认配置：时候启用多音字模式
-var Separator string = "-" // 默认配置： `Slug` 中 Join 所用的分隔符
+// 默认配置：风格
+var Style = Normal
+
+// 默认配置：时候启用多音字模式
+var Heteronym = false
+
+// 默认配置： `Slug` 中 Join 所用的分隔符
+var Separator = "-"
 
 // NewArgs 返回包含默认配置的 `*Args`
 func NewArgs() *Args {
@@ -65,7 +70,7 @@ func NewArgs() *Args {
 // 获取单个拼音中的声母
 func initial(p string) string {
 	s := ""
-	for _, v := range _Initials {
+	for _, v := range initials {
 		if strings.HasPrefix(p, v) {
 			s = v
 			break
@@ -89,13 +94,13 @@ func toFixed(p string, a *Args) string {
 	}
 
 	// 替换拼音中的带声调字符
-	py := re_PHONETIC_SYMBOL.ReplaceAllStringFunc(p, func(m string) string {
+	py := rePhoneticSymbol.ReplaceAllStringFunc(p, func(m string) string {
 		symbol, _ := phoneticSymbol[m]
 		switch a.Style {
 		// 不包含声调
 		case Normal, FirstLetter, Finals:
 			// 去掉声调: a1 -> a
-			m = re_Tone2.ReplaceAllString(symbol, "$1")
+			m = reTone2.ReplaceAllString(symbol, "$1")
 		case Tone2, FinalsTone2:
 			// 返回使用数字标识声调的字符
 			m = symbol
