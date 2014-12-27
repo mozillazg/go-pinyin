@@ -13,7 +13,7 @@ func main() {
 	flag.Parse()
 	hans := flag.Args()
 	args := pinyin.NewArgs()
-	args.Style = pinyin.TONE
+	args.Style = pinyin.Tone
 
 	if len(hans) == 0 {
 		fmt.Println("请至少输入一个汉字: pinyin hans [hans ...]")

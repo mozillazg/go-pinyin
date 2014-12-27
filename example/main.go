@@ -10,39 +10,39 @@ func main() {
 	a := pinyin.NewArgs()
 	fmt.Println("default: ", a)
 
-	a.Style = pinyin.NORMAL
-	fmt.Println("NORMAL: ", a)
+	a.Style = pinyin.Normal
+	fmt.Println("Normal: ", a)
 
-	a.Style = pinyin.TONE
-	fmt.Println("TONE: ", a)
+	a.Style = pinyin.Tone
+	fmt.Println("Tone: ", a)
 
-	a.Style = pinyin.TONE2
-	fmt.Println("TONE2: ", a)
+	a.Style = pinyin.Tone2
+	fmt.Println("Tone2: ", a)
 
-	a.Style = pinyin.INITIALS
-	fmt.Println("INITIALS: ", a)
+	a.Style = pinyin.Initials
+	fmt.Println("Initials: ", a)
 
-	a.Style = pinyin.FIRST_LETTER
-	fmt.Println("FIRST_LETTER: ", a)
+	a.Style = pinyin.FirstLetter
+	fmt.Println("FirstLetter: ", a)
 
-	a.Style = pinyin.FINALS
-	fmt.Println("FINALS: ", a)
+	a.Style = pinyin.Finals
+	fmt.Println("Finals: ", a)
 
-	a.Style = pinyin.FINALS_TONE
-	fmt.Println("FINALS_TONE: ", a)
+	a.Style = pinyin.FinalsTone
+	fmt.Println("FinalsTone: ", a)
 
-	a.Style = pinyin.FINALS_TONE2
-	fmt.Println("FINALS_TONE2: ", a)
+	a.Style = pinyin.FinalsTone2
+	fmt.Println("FinalsTone2: ", a)
 
 	a = NewArgs()
 	a.Heteronym = true
 	fmt.Println("Heteronym true: ", a)
 
-	a.Style = pinyin.INITIALS
-	fmt.Println("Heteronym true INITIALS: ", a)
+	a.Style = pinyin.Initials
+	fmt.Println("Heteronym true Initials: ", a)
 
-	a.Style = pinyin.TONE2
-	fmt.Println("Heteronym true TONE2: ",
+	a.Style = pinyin.Tone2
+	fmt.Println("Heteronym true Tone2: ",
 		pinyin.Pinyin(hans, a),
 	)
 
