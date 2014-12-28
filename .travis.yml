@@ -10,14 +10,9 @@ before_install:
   - go get github.com/axw/gocov/gocov
   - go get github.com/mattn/goveralls
 
-install:
-  - go get github.com/mozillazg/go-pinyin
-  - go get github.com/mozillazg/go-pinyin/pinyin
-
 script:
-  - pinyin abc
-  - go test -v -covermode=count -coverprofile=coverage.out
-  - $(go env GOPATH | awk 'BEGIN{FS=":"} {print $1}')/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken WAzmh3gmiQEUYEHM2wkwSH4oTrshvMmll
+  - go run pinyin/main.go abc
+  - $HOME/gopath/bin/goveralls -repotoken WAzmh3gmiQEUYEHM2wkwSH4oTrshvMmll
 
 notifications:
   email:
