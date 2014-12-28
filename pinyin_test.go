@@ -109,7 +109,6 @@ func TestSlug(t *testing.T) {
 	}
 
 	a := NewArgs()
-	a.Separator = "-"
 	v = Slug(s, a)
 	value = "zhong-guo-ren"
 	if v != value {

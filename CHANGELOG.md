@@ -5,6 +5,7 @@
 
 * 新增 ``func NewArgs() *Args``
 * 各函数内的 ``a Args`` 参数改为 ``a *Args``
+* 解决 ``Args.Separator`` 无法赋值为 ``""`` 的 BUG
 * 规范命名:
     * ``NORMAL`` -> ``Normal``
     * ``TONE`` -> ``Tone``
