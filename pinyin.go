@@ -13,7 +13,7 @@ const (
 	Copyright = "Copyright (c) 2014 mozillazg, 闲耘"
 )
 
-// 拼音风格
+// 拼音风格(推荐)
 const (
 	Normal      = 0 // 普通风格，不带声调（默认风格）。如： pin yin
 	Tone        = 1 // 声调风格1，拼音声调在韵母第一个字母上。如： pīn yīn
@@ -23,6 +23,18 @@ const (
 	Finals      = 5 // 韵母风格1，只返回各个拼音的韵母部分，不带声调。如： ong uo
 	FinalsTone  = 6 // 韵母风格2，带声调，声调在韵母第一个字母上。如： ōng uó
 	FinalsTone2 = 7 // 韵母风格2，带声调，声调在各个拼音之后，用数字 [0-4] 进行表示。如： o1ng uo2
+)
+
+// 拼音风格(兼容之前的版本)
+const (
+	NORMAL       = 0 // 普通风格，不带声调（默认风格）。如： pin yin
+	TONE         = 1 // 声调风格1，拼音声调在韵母第一个字母上。如： pīn yīn
+	TONE2        = 2 // 声调风格2，即拼音声调在各个拼音之后，用数字 [0-4] 进行表示。如： pi1n yi1n
+	INITIALS     = 3 // 声母风格，只返回各个拼音的声母部分。如： 中国 的拼音 zh g
+	FIRST_LETTER = 4 // 首字母风格，只返回拼音的首字母部分。如： p y
+	FINALS       = 5 // 韵母风格1，只返回各个拼音的韵母部分，不带声调。如： ong uo
+	FINALS_TONE  = 6 // 韵母风格2，带声调，声调在韵母第一个字母上。如： ōng uó
+	FINALS_TONE2 = 7 // 韵母风格2，带声调，声调在各个拼音之后，用数字 [0-4] 进行表示。如： o1ng uo2
 )
 
 // 声母表
@@ -62,9 +74,9 @@ var Heteronym = false
 // 默认配置： `Slug` 中 Join 所用的分隔符
 var Separator = "-"
 
-// NewArgs 返回包含默认配置的 `*Args`
-func NewArgs() *Args {
-	return &Args{Style, Heteronym, Separator}
+// NewArgs 返回包含默认配置的 `Args`
+func NewArgs() Args {
+	return Args{Style, Heteronym, Separator}
 }
 
 // 获取单个拼音中的声母
@@ -88,7 +100,7 @@ func final(p string) string {
 	return strings.Join(strings.SplitN(p, i, 2), "")
 }
 
-func toFixed(p string, a *Args) string {
+func toFixed(p string, a Args) string {
 	if a.Style == Initials {
 		return initial(p)
 	}
@@ -121,7 +133,7 @@ func toFixed(p string, a *Args) string {
 	return py
 }
 
-func applyStyle(p []string, a *Args) []string {
+func applyStyle(p []string, a Args) []string {
 	newP := []string{}
 	for _, v := range p {
 		newP = append(newP, toFixed(v, a))
@@ -130,7 +142,7 @@ func applyStyle(p []string, a *Args) []string {
 }
 
 // SinglePinyin 把单个 `rune` 类型的汉字转换为拼音.
-func SinglePinyin(r rune, a *Args) []string {
+func SinglePinyin(r rune, a Args) []string {
 	value, ok := PinyinDict[int(r)]
 	pys := []string{}
 	if ok {
@@ -144,7 +156,7 @@ func SinglePinyin(r rune, a *Args) []string {
 }
 
 // Pinyin 汉字转拼音，支持多音字模式.
-func Pinyin(s string, a *Args) [][]string {
+func Pinyin(s string, a Args) [][]string {
 	hans := []rune(s)
 	pys := [][]string{}
 	for _, r := range hans {
@@ -155,7 +167,7 @@ func Pinyin(s string, a *Args) [][]string {
 
 // LazyPinyin 汉字转拼音，与 `Pinyin` 的区别是：
 // 返回值类型不同，并且不支持多音字模式，每个汉字只取第一个音.
-func LazyPinyin(s string, a *Args) []string {
+func LazyPinyin(s string, a Args) []string {
 	a.Heteronym = false
 	pys := []string{}
 	for _, v := range Pinyin(s, a) {
@@ -165,7 +177,7 @@ func LazyPinyin(s string, a *Args) []string {
 }
 
 // Slug join `LazyPinyin` 的返回值.
-func Slug(s string, a *Args) string {
+func Slug(s string, a Args) string {
 	separator := a.Separator
 	return strings.Join(LazyPinyin(s, a), separator)
 }

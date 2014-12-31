@@ -5,9 +5,9 @@ import (
 	"testing"
 )
 
-type pinyinFunc func(string, *Args) [][]string
+type pinyinFunc func(string, Args) [][]string
 
-func testPinyin(s string, d map[*Args][][]string, f pinyinFunc) (t *testing.T) {
+func testPinyin(s string, d map[Args][][]string, f pinyinFunc) (t *testing.T) {
 	for a := range d {
 		value, _ := d[a]
 		v := f(s, a)
@@ -20,53 +20,53 @@ func testPinyin(s string, d map[*Args][][]string, f pinyinFunc) (t *testing.T) {
 
 func TestPinyin(t *testing.T) {
 	hans := "中国人"
-	testData := map[*Args][][]string{
-		&Args{}: [][]string{
+	testData := map[Args][][]string{
+		Args{}: [][]string{
 			[]string{"zhong"},
 			[]string{"guo"},
 			[]string{"ren"},
 		},
-		&Args{Style: Normal}: [][]string{
+		Args{Style: Normal}: [][]string{
 			[]string{"zhong"},
 			[]string{"guo"},
 			[]string{"ren"},
 		},
-		&Args{Style: Tone}: [][]string{
+		Args{Style: Tone}: [][]string{
 			[]string{"zhōng"},
 			[]string{"guó"},
 			[]string{"rén"},
 		},
-		&Args{Style: Tone2}: [][]string{
+		Args{Style: Tone2}: [][]string{
 			[]string{"zho1ng"},
 			[]string{"guo2"},
 			[]string{"re2n"},
 		},
-		&Args{Style: Initials}: [][]string{
+		Args{Style: Initials}: [][]string{
 			[]string{"zh"},
 			[]string{"g"},
 			[]string{"r"},
 		},
-		&Args{Style: FirstLetter}: [][]string{
+		Args{Style: FirstLetter}: [][]string{
 			[]string{"z"},
 			[]string{"g"},
 			[]string{"r"},
 		},
-		&Args{Style: Finals}: [][]string{
+		Args{Style: Finals}: [][]string{
 			[]string{"ong"},
 			[]string{"uo"},
 			[]string{"en"},
 		},
-		&Args{Style: FinalsTone}: [][]string{
+		Args{Style: FinalsTone}: [][]string{
 			[]string{"ōng"},
 			[]string{"uó"},
 			[]string{"én"},
 		},
-		&Args{Style: FinalsTone2}: [][]string{
+		Args{Style: FinalsTone2}: [][]string{
 			[]string{"o1ng"},
 			[]string{"uo2"},
 			[]string{"e2n"},
 		},
-		&Args{Heteronym: true}: [][]string{
+		Args{Heteronym: true}: [][]string{
 			[]string{"zhong", "zhong"},
 			[]string{"guo"},
 			[]string{"ren"},
@@ -87,7 +87,7 @@ func TestNoneHans(t *testing.T) {
 
 func TestLazyPinyin(t *testing.T) {
 	s := "中国人"
-	v := LazyPinyin(s, &Args{})
+	v := LazyPinyin(s, Args{})
 	value := []string{"zhong", "guo", "ren"}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
@@ -96,13 +96,13 @@ func TestLazyPinyin(t *testing.T) {
 
 func TestSlug(t *testing.T) {
 	s := "中国人"
-	v := Slug(s, &Args{})
+	v := Slug(s, Args{})
 	value := "zhongguoren"
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 
-	v = Slug(s, &Args{Separator: ","})
+	v = Slug(s, Args{Separator: ","})
 	value = "zhong,guo,ren"
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
