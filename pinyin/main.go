@@ -12,7 +12,8 @@ func main() {
 	heteronym := flag.Bool("e", false, "启用多音字模式")
 	flag.Parse()
 	hans := flag.Args()
-	args := pinyin.Args{Style: pinyin.TONE}
+	args := pinyin.NewArgs()
+	args.Style = pinyin.Tone
 
 	if len(hans) == 0 {
 		fmt.Println("请至少输入一个汉字: pinyin hans [hans ...]")

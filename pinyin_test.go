@@ -20,48 +20,48 @@ func testPinyin(s string, d map[Args][][]string, f pinyinFunc) (t *testing.T) {
 
 func TestPinyin(t *testing.T) {
 	hans := "中国人"
-	test_data := map[Args][][]string{
+	testData := map[Args][][]string{
 		Args{}: [][]string{
 			[]string{"zhong"},
 			[]string{"guo"},
 			[]string{"ren"},
 		},
-		Args{Style: NORMAL}: [][]string{
+		Args{Style: Normal}: [][]string{
 			[]string{"zhong"},
 			[]string{"guo"},
 			[]string{"ren"},
 		},
-		Args{Style: TONE}: [][]string{
+		Args{Style: Tone}: [][]string{
 			[]string{"zhōng"},
 			[]string{"guó"},
 			[]string{"rén"},
 		},
-		Args{Style: TONE2}: [][]string{
+		Args{Style: Tone2}: [][]string{
 			[]string{"zho1ng"},
 			[]string{"guo2"},
 			[]string{"re2n"},
 		},
-		Args{Style: INITIALS}: [][]string{
+		Args{Style: Initials}: [][]string{
 			[]string{"zh"},
 			[]string{"g"},
 			[]string{"r"},
 		},
-		Args{Style: FIRST_LETTER}: [][]string{
+		Args{Style: FirstLetter}: [][]string{
 			[]string{"z"},
 			[]string{"g"},
 			[]string{"r"},
 		},
-		Args{Style: FINALS}: [][]string{
+		Args{Style: Finals}: [][]string{
 			[]string{"ong"},
 			[]string{"uo"},
 			[]string{"en"},
 		},
-		Args{Style: FINALS_TONE}: [][]string{
+		Args{Style: FinalsTone}: [][]string{
 			[]string{"ōng"},
 			[]string{"uó"},
 			[]string{"én"},
 		},
-		Args{Style: FINALS_TONE2}: [][]string{
+		Args{Style: FinalsTone2}: [][]string{
 			[]string{"o1ng"},
 			[]string{"uo2"},
 			[]string{"e2n"},
@@ -73,12 +73,12 @@ func TestPinyin(t *testing.T) {
 		},
 	}
 
-	testPinyin(hans, test_data, Pinyin)
+	testPinyin(hans, testData, Pinyin)
 }
 
 func TestNoneHans(t *testing.T) {
 	s := "abc"
-	v := Pinyin(s, Args{})
+	v := Pinyin(s, NewArgs())
 	value := [][]string{[]string{}, []string{}, []string{}}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
@@ -97,13 +97,20 @@ func TestLazyPinyin(t *testing.T) {
 func TestSlug(t *testing.T) {
 	s := "中国人"
 	v := Slug(s, Args{})
-	value := "zhong-guo-ren"
+	value := "zhongguoren"
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 
 	v = Slug(s, Args{Separator: ","})
 	value = "zhong,guo,ren"
+	if v != value {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+
+	a := NewArgs()
+	v = Slug(s, a)
+	value = "zhong-guo-ren"
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
 	}

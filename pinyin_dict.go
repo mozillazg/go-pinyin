@@ -1,21 +1,15 @@
 package pinyin
 
-/*
-拼音库，抓取自汉典网(zdic.net)。包含下列范围的 Unicode 字符：
-
-CJK基本:[4E00-9FFF]       CJK扩展A:[3400-4DBF]
-CJK扩展B:[20000-2A6DF]    CJK扩展C:[2A700-2B73F]
-CJK扩展D:[2B740-2B81D]    CJK兼容扩展:[2F800-2FA1F]
-CJK部首扩展:[2E80-2EFF]    CJK笔画:[31C0-31EF]
-CJK康熙部首:[2F00-2FDF]    CJK兼容:[F900-FAFF]
-
-注释掉了没有拼音的字符。
-*/
-
-// 之所以不用 map[int][]string 是因为用了这个后
-// 编译时间太长， 编译时CPU 占有率太高
-
-var PinyinDict map[int]string = map[int]string{
+// 拼音库，抓取自汉典网(zdic.net)。包含下列范围的 Unicode 字符：
+//
+//	CJK基本:[4E00-9FFF]       CJK扩展A:[3400-4DBF]
+//	CJK扩展B:[20000-2A6DF]    CJK扩展C:[2A700-2B73F]
+//	CJK扩展D:[2B740-2B81D]    CJK兼容扩展:[2F800-2FA1F]
+//	CJK部首扩展:[2E80-2EFF]   CJK笔画:[31C0-31EF]
+//	CJK康熙部首:[2F00-2FDF]   CJK兼容:[F900-FAFF]
+//
+// 注释掉了没有拼音的字符。
+var PinyinDict = map[int]string{
 	// CJK 部首扩展:[2E80-2EFF]
 	// 0x2E80: "",  // ⺀
 	// 0x2E81: "",  // ⺁
