@@ -5,6 +5,8 @@ go:
   - 1.4
   - tip
 
+sudo: false
+
 before_install:
   - if ! go get code.google.com/p/go.tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
   - go get github.com/axw/gocov/gocov
@@ -13,8 +15,3 @@ before_install:
 script:
   - go run pinyin/main.go abc
   - $HOME/gopath/bin/goveralls -repotoken WAzmh3gmiQEUYEHM2wkwSH4oTrshvMmll
-
-notifications:
-  email:
-    on_success: change
-    on_failure: always
