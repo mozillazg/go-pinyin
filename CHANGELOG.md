@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 (yyyy-mm-dd)
+## 0.2.0 (2015-01-04)
 
 * 新增 ``func NewArgs() Args``
 * 解决 ``Args.Separator`` 无法赋值为 ``""`` 的 BUG
