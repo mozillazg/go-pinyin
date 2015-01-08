@@ -23,6 +23,14 @@ $ pinyin 中国人
 zhōng guó rén
 ```
 
+
+Documentation
+--------------
+
+API documentation can be found here:
+https://godoc.org/github.com/mozillazg/go-pinyin
+
+
 Usage
 ------
 
