@@ -146,9 +146,8 @@ func SinglePinyin(r rune, a Args) []string {
 	value, ok := PinyinDict[int(r)]
 	pys := []string{}
 	if ok {
-		if len(value) < 1 || a.Heteronym {
-			pys = strings.Split(value, ",")
-		} else {
+		pys = strings.Split(value, ",")
+		if !a.Heteronym {
 			pys = strings.Split(value, ",")[:1]
 		}
 	}
