@@ -7,7 +7,7 @@ import (
 
 // Meta
 const (
-	Version   = "0.2.0"
+	Version   = "0.2.1"
 	Author    = "mozillazg, 闲耘"
 	License   = "MIT"
 	Copyright = "Copyright (c) 2014 mozillazg, 闲耘"
@@ -39,7 +39,7 @@ const (
 
 // 声母表
 var initials = strings.Split(
-	"zh,ch,sh,b,p,m,f,d,t,n,l,g,k,h,j,q,x,r,z,c,s,yu,y,w",
+	"b,p,m,f,d,t,n,l,g,k,h,j,q,x,r,zh,ch,sh,z,c,s",
 	",",
 )
 
@@ -146,9 +146,8 @@ func SinglePinyin(r rune, a Args) []string {
 	value, ok := PinyinDict[int(r)]
 	pys := []string{}
 	if ok {
-		if len(value) < 1 || a.Heteronym {
-			pys = strings.Split(value, ",")
-		} else {
+		pys = strings.Split(value, ",")
+		if !a.Heteronym {
 			pys = strings.Split(value, ",")[:1]
 		}
 	}
