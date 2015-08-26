@@ -74,6 +74,18 @@ func TestPinyin(t *testing.T) {
 	}
 
 	testPinyin(hans, testData, Pinyin)
+
+	// 测试 Heteronym
+	hans = "你"
+	testData = map[Args][][]string{
+		Args{}: [][]string{
+			[]string{"ni"},
+		},
+		Args{Heteronym: true}: [][]string{
+			[]string{"ni"},
+		},
+	}
+	testPinyin(hans, testData, Pinyin)
 }
 
 func TestNoneHans(t *testing.T) {
@@ -122,4 +134,28 @@ func TestFinal(t *testing.T) {
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
+}
+
+func TestNewInitials(t *testing.T) {
+	hans := "鱼"
+	testData := map[Args][][]string{
+		Args{Style: Initials}: [][]string{
+			[]string{""},
+		},
+		Args{Style: Finals}: [][]string{
+			[]string{"yu"},
+		},
+	}
+	testPinyin(hans, testData, Pinyin)
+
+	hans = "五"
+	testData = map[Args][][]string{
+		Args{Style: Initials}: [][]string{
+			[]string{""},
+		},
+		Args{Style: Finals}: [][]string{
+			[]string{"wu"},
+		},
+	}
+	testPinyin(hans, testData, Pinyin)
 }
