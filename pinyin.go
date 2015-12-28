@@ -159,7 +159,10 @@ func Pinyin(s string, a Args) [][]string {
 	hans := []rune(s)
 	pys := [][]string{}
 	for _, r := range hans {
-		pys = append(pys, SinglePinyin(r, a))
+		py := SinglePinyin(r, a)
+		if len(py) > 0 {
+			pys = append(pys, py)
+		}
 	}
 	return pys
 }

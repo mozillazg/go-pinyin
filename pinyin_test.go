@@ -91,7 +91,7 @@ func TestPinyin(t *testing.T) {
 func TestNoneHans(t *testing.T) {
 	s := "abc"
 	v := Pinyin(s, NewArgs())
-	value := [][]string{[]string{}, []string{}, []string{}}
+	value := [][]string{}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
@@ -101,6 +101,13 @@ func TestLazyPinyin(t *testing.T) {
 	s := "中国人"
 	v := LazyPinyin(s, Args{})
 	value := []string{"zhong", "guo", "ren"}
+	if !reflect.DeepEqual(v, value) {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+
+	s = "中国人abc"
+	v = LazyPinyin(s, Args{})
+	value = []string{"zhong", "guo", "ren"}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
@@ -123,6 +130,13 @@ func TestSlug(t *testing.T) {
 	a := NewArgs()
 	v = Slug(s, a)
 	value = "zhong-guo-ren"
+	if v != value {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+
+	s = "中国人abc，,中"
+	v = Slug(s, a)
+	value = "zhong-guo-ren-zhong"
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
