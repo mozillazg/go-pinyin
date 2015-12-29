@@ -7,7 +7,7 @@ import (
 
 // Meta
 const (
-	Version   = "0.2.1"
+	Version   = "0.3.0"
 	Author    = "mozillazg, 闲耘"
 	License   = "MIT"
 	Copyright = "Copyright (c) 2014 mozillazg, 闲耘"
@@ -15,11 +15,11 @@ const (
 
 // 拼音风格(推荐)
 const (
-	Normal      = 0 // 普通风格，不带声调（默认风格）。如： pin yin
-	Tone        = 1 // 声调风格1，拼音声调在韵母第一个字母上。如： pīn yīn
-	Tone2       = 2 // 声调风格2，即拼音声调在各个拼音之后，用数字 [0-4] 进行表示。如： pi1n yi1n
-	Initials    = 3 // 声母风格，只返回各个拼音的声母部分。如： 中国 的拼音 zh g
-	FirstLetter = 4 // 首字母风格，只返回拼音的首字母部分。如： p y
+	Normal      = 0 // 普通风格，不带声调（默认风格）。如： zhong guo
+	Tone        = 1 // 声调风格1，拼音声调在韵母第一个字母上。如： zhōng guó
+	Tone2       = 2 // 声调风格2，即拼音声调在各个拼音之后，用数字 [0-4] 进行表示。如： zho1ng guo2
+	Initials    = 3 // 声母风格，只返回各个拼音的声母部分。如： zh g
+	FirstLetter = 4 // 首字母风格，只返回拼音的首字母部分。如： z g
 	Finals      = 5 // 韵母风格1，只返回各个拼音的韵母部分，不带声调。如： ong uo
 	FinalsTone  = 6 // 韵母风格2，带声调，声调在韵母第一个字母上。如： ōng uó
 	FinalsTone2 = 7 // 韵母风格2，带声调，声调在各个拼音之后，用数字 [0-4] 进行表示。如： o1ng uo2
@@ -27,14 +27,14 @@ const (
 
 // 拼音风格(兼容之前的版本)
 const (
-	NORMAL       = 0 // 普通风格，不带声调（默认风格）。如： pin yin
-	TONE         = 1 // 声调风格1，拼音声调在韵母第一个字母上。如： pīn yīn
-	TONE2        = 2 // 声调风格2，即拼音声调在各个拼音之后，用数字 [0-4] 进行表示。如： pi1n yi1n
-	INITIALS     = 3 // 声母风格，只返回各个拼音的声母部分。如： 中国 的拼音 zh g
-	FIRST_LETTER = 4 // 首字母风格，只返回拼音的首字母部分。如： p y
-	FINALS       = 5 // 韵母风格1，只返回各个拼音的韵母部分，不带声调。如： ong uo
-	FINALS_TONE  = 6 // 韵母风格2，带声调，声调在韵母第一个字母上。如： ōng uó
-	FINALS_TONE2 = 7 // 韵母风格2，带声调，声调在各个拼音之后，用数字 [0-4] 进行表示。如： o1ng uo2
+	NORMAL       = Normal
+	TONE         = Tone
+	TONE2        = Tone2
+	INITIALS     = Initials
+	FIRST_LETTER = FirstLetter
+	FINALS       = Finals
+	FINALS_TONE  = FinalsTone
+	FINALS_TONE2 = FinalsTone2
 )
 
 // 声母表
@@ -159,7 +159,10 @@ func Pinyin(s string, a Args) [][]string {
 	hans := []rune(s)
 	pys := [][]string{}
 	for _, r := range hans {
-		pys = append(pys, SinglePinyin(r, a))
+		py := SinglePinyin(r, a)
+		if len(py) > 0 {
+			pys = append(pys, py)
+		}
 	}
 	return pys
 }
