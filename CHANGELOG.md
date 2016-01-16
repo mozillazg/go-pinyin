@@ -1,5 +1,12 @@
 # Changelog
 
+
+## 0.4.0 (2016-mm-dd)
+
+* **NEW** `Args` 结构体新增 field: `Fallback func(r rune, a Args) []string`
+  用于处理没有拼音的字符（默认忽略没有拼音的字符）。
+
+
 ## 0.3.0 (2015-12-29)
 
 * fix "当字符串中有非中文的时候，会出现下标越界的情况"(影响 `pinyin.LazyPinyin` 和 `pinyin.Slug` ([#1](https://github.com/mozillazg/go-pinyin/issues/1)))

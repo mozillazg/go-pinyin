@@ -6,13 +6,16 @@ import (
 )
 
 type pinyinFunc func(string, Args) [][]string
+type testCase struct {
+	args   Args
+	result [][]string
+}
 
-func testPinyin(s string, d map[Args][][]string, f pinyinFunc) (t *testing.T) {
-	for a := range d {
-		value, _ := d[a]
-		v := f(s, a)
-		if !reflect.DeepEqual(v, value) {
-			t.Errorf("Expected %s, got %s", value, v)
+func testPinyin(s string, d []testCase, f pinyinFunc) (t *testing.T) {
+	for _, tc := range d {
+		v := f(s, tc.args)
+		if !reflect.DeepEqual(v, tc.result) {
+			t.Errorf("Expected %s, got %s", tc.result, v)
 		}
 	}
 	return t
@@ -20,69 +23,124 @@ func testPinyin(s string, d map[Args][][]string, f pinyinFunc) (t *testing.T) {
 
 func TestPinyin(t *testing.T) {
 	hans := "中国人"
-	testData := map[Args][][]string{
-		Args{}: [][]string{
-			[]string{"zhong"},
-			[]string{"guo"},
-			[]string{"ren"},
+	testData := []testCase{
+		// default
+		testCase{
+			Args{Style: Normal},
+			[][]string{
+				[]string{"zhong"},
+				[]string{"guo"},
+				[]string{"ren"},
+			},
 		},
-		Args{Style: Normal}: [][]string{
-			[]string{"zhong"},
-			[]string{"guo"},
-			[]string{"ren"},
+		// default
+		testCase{
+			NewArgs(),
+			[][]string{
+				[]string{"zhong"},
+				[]string{"guo"},
+				[]string{"ren"},
+			},
 		},
-		Args{Style: Tone}: [][]string{
-			[]string{"zhōng"},
-			[]string{"guó"},
-			[]string{"rén"},
+		// Normal
+		testCase{
+			Args{Style: Normal},
+			[][]string{
+				[]string{"zhong"},
+				[]string{"guo"},
+				[]string{"ren"},
+			},
 		},
-		Args{Style: Tone2}: [][]string{
-			[]string{"zho1ng"},
-			[]string{"guo2"},
-			[]string{"re2n"},
+		// Tone
+		testCase{
+			Args{Style: Tone},
+			[][]string{
+				[]string{"zhōng"},
+				[]string{"guó"},
+				[]string{"rén"},
+			},
 		},
-		Args{Style: Initials}: [][]string{
-			[]string{"zh"},
-			[]string{"g"},
-			[]string{"r"},
+		// Tone2
+		testCase{
+			Args{Style: Tone2},
+			[][]string{
+				[]string{"zho1ng"},
+				[]string{"guo2"},
+				[]string{"re2n"},
+			},
 		},
-		Args{Style: FirstLetter}: [][]string{
-			[]string{"z"},
-			[]string{"g"},
-			[]string{"r"},
+		// Initials
+		testCase{
+			Args{Style: Initials},
+			[][]string{
+				[]string{"zh"},
+				[]string{"g"},
+				[]string{"r"},
+			},
 		},
-		Args{Style: Finals}: [][]string{
-			[]string{"ong"},
-			[]string{"uo"},
-			[]string{"en"},
+		// FirstLetter
+		testCase{
+			Args{Style: FirstLetter},
+			[][]string{
+				[]string{"z"},
+				[]string{"g"},
+				[]string{"r"},
+			},
 		},
-		Args{Style: FinalsTone}: [][]string{
-			[]string{"ōng"},
-			[]string{"uó"},
-			[]string{"én"},
+		// Finals
+		testCase{
+			Args{Style: Finals},
+			[][]string{
+				[]string{"ong"},
+				[]string{"uo"},
+				[]string{"en"},
+			},
 		},
-		Args{Style: FinalsTone2}: [][]string{
-			[]string{"o1ng"},
-			[]string{"uo2"},
-			[]string{"e2n"},
+		// FinalsTone
+		testCase{
+			Args{Style: FinalsTone},
+			[][]string{
+				[]string{"ōng"},
+				[]string{"uó"},
+				[]string{"én"},
+			},
 		},
-		Args{Heteronym: true}: [][]string{
-			[]string{"zhong", "zhong"},
-			[]string{"guo"},
-			[]string{"ren"},
+		// FinalsTone2
+		testCase{
+			Args{Style: FinalsTone2},
+			[][]string{
+				[]string{"o1ng"},
+				[]string{"uo2"},
+				[]string{"e2n"},
+			},
+		},
+		// Heteronym
+		testCase{
+			Args{Heteronym: true},
+			[][]string{
+				[]string{"zhong", "zhong"},
+				[]string{"guo"},
+				[]string{"ren"},
+			},
 		},
 	}
 
 	testPinyin(hans, testData, Pinyin)
 
-	// 测试 Heteronym
+	// 测试不是多音字的 Heteronym
 	hans = "你"
-	testData = map[Args][][]string{
-		Args{}: [][]string{
-			[]string{"ni"},
+	testData = []testCase{
+		testCase{
+			Args{},
+			[][]string{
+				[]string{"ni"},
+			},
 		},
-		Args{Heteronym: true}: [][]string{
-			[]string{"ni"},
+		testCase{
+			Args{Heteronym: true},
+			[][]string{
+				[]string{"ni"},
+			},
 		},
 	}
 	testPinyin(hans, testData, Pinyin)
@@ -150,25 +208,87 @@ func TestFinal(t *testing.T) {
 	}
 }
 
+// `yu`, `y`, `w` 不是声母
 func TestNewInitials(t *testing.T) {
 	hans := "鱼"
-	testData := map[Args][][]string{
-		Args{Style: Initials}: [][]string{
-			[]string{""},
+	testData := []testCase{
+		testCase{
+			Args{Style: Initials},
+			[][]string{
+				[]string{""},
+			},
 		},
-		Args{Style: Finals}: [][]string{
-			[]string{"yu"},
+		testCase{
+			Args{Style: Finals},
+			[][]string{
+				[]string{"yu"},
+			},
 		},
 	}
 	testPinyin(hans, testData, Pinyin)
 
 	hans = "五"
-	testData = map[Args][][]string{
-		Args{Style: Initials}: [][]string{
-			[]string{""},
+	testData = []testCase{
+		testCase{
+			Args{Style: Initials},
+			[][]string{
+				[]string{""},
+			},
 		},
-		Args{Style: Finals}: [][]string{
-			[]string{"wu"},
+		testCase{
+			Args{Style: Finals},
+			[][]string{
+				[]string{"wu"},
+			},
+		},
+	}
+	testPinyin(hans, testData, Pinyin)
+}
+
+func TestFallback(t *testing.T) {
+	hans := "中国人abc"
+	testData := []testCase{
+		// default
+		testCase{
+			NewArgs(),
+			[][]string{
+				[]string{"zhong"},
+				[]string{"guo"},
+				[]string{"ren"},
+			},
+		},
+		// custom
+		testCase{
+			Args{
+				Fallback: func(r rune, a Args) []string {
+					return []string{"la"}
+				},
+			},
+			[][]string{
+				[]string{"zhong"},
+				[]string{"guo"},
+				[]string{"ren"},
+				[]string{"la"},
+				[]string{"la"},
+				[]string{"la"},
+			},
+		},
+		// custom
+		testCase{
+			Args{
+				Heteronym: true,
+				Fallback: func(r rune, a Args) []string {
+					return []string{"la", "wo"}
+				},
+			},
+			[][]string{
+				[]string{"zhong", "zhong"},
+				[]string{"guo"},
+				[]string{"ren"},
+				[]string{"la", "wo"},
+				[]string{"la", "wo"},
+				[]string{"la", "wo"},
+			},
 		},
 	}
 	testPinyin(hans, testData, Pinyin)

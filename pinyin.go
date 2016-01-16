@@ -10,7 +10,7 @@ const (
 	Version   = "0.3.0"
 	Author    = "mozillazg, 闲耘"
 	License   = "MIT"
-	Copyright = "Copyright (c) 2014 mozillazg, 闲耘"
+	Copyright = "Copyright (c) 2016 mozillazg, 闲耘"
 )
 
 // 拼音风格(推荐)
@@ -63,6 +63,10 @@ type Args struct {
 	Style     int    // 拼音风格（默认： Normal)
 	Heteronym bool   // 是否启用多音字模式（默认：禁用）
 	Separator string // Slug 中使用的分隔符（默认：-)
+
+	// 处理没有拼音的字符（默认忽略没有拼音的字符）
+	// 函数返回的 slice 的长度为0 则表示忽略这个字符
+	Fallback func(r rune, a Args) []string
 }
 
 // 默认配置：风格
@@ -74,9 +78,14 @@ var Heteronym = false
 // 默认配置： `Slug` 中 Join 所用的分隔符
 var Separator = "-"
 
+// 默认配置: 如何处理没有拼音的字符(忽略这个字符)
+var Fallback = func(r rune, a Args) []string {
+	return []string{}
+}
+
 // NewArgs 返回包含默认配置的 `Args`
 func NewArgs() Args {
-	return Args{Style, Heteronym, Separator}
+	return Args{Style, Heteronym, Separator, Fallback}
 }
 
 // 获取单个拼音中的声母
@@ -117,7 +126,7 @@ func toFixed(p string, a Args) string {
 			// 返回使用数字标识声调的字符
 			m = symbol
 		default:
-			// 	// 声调在头上
+			// 声调在头上
 		}
 		return m
 	})
@@ -143,15 +152,24 @@ func applyStyle(p []string, a Args) []string {
 
 // SinglePinyin 把单个 `rune` 类型的汉字转换为拼音.
 func SinglePinyin(r rune, a Args) []string {
+	if a.Fallback == nil {
+		a.Fallback = Fallback
+	}
 	value, ok := PinyinDict[int(r)]
 	pys := []string{}
 	if ok {
 		pys = strings.Split(value, ",")
-		if !a.Heteronym {
-			pys = strings.Split(value, ",")[:1]
-		}
+	} else {
+		pys = a.Fallback(r, a)
 	}
-	return applyStyle(pys, a)
+	if len(pys) > 0 {
+		if !a.Heteronym {
+			pys = pys[:1]
+		}
+		return applyStyle(pys, a)
+	} else {
+		return pys
+	}
 }
 
 // Pinyin 汉字转拼音，支持多音字模式.
