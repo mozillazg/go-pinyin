@@ -1,17 +1,32 @@
 # Changelog
 
 
-## 0.4.0 (2016-mm-dd)
+## 0.4.0 (2016-01-29)
 
 * **NEW** `Args` 结构体新增 field: `Fallback func(r rune, a Args) []string`
-  用于处理没有拼音的字符（默认忽略没有拼音的字符）。
+  用于处理没有拼音的字符（默认忽略没有拼音的字符）:
+  ```go
+  a := pinyin.NewArgs()
+  a.Fallback = func(r rune, a pinyin.Args) []string {
+      return []string{string(r + 1)}
+  }
+  fmt.Println(pinyin.Pinyin("中国人abc", a))
+  // Output: [[zhong] [guo] [ren] [b] [c] [d]]
+
+  // or
+  pinyin.Fallback = func(r rune, a pinyin.Args) []string {
+      return []string{string(r)}
+  }
+  fmt.Println(pinyin.Pinyin("中国人abc", pinyin.NewArgs()))
+  // Output: [[zhong] [guo] [ren] [a] [b] [c]]
+  ```
 
 
 ## 0.3.0 (2015-12-29)
 
 * fix "当字符串中有非中文的时候，会出现下标越界的情况"(影响 `pinyin.LazyPinyin` 和 `pinyin.Slug` ([#1](https://github.com/mozillazg/go-pinyin/issues/1)))
 * 调整对非中文字符的处理：当遇到没有拼音的字符时，直接忽略
-  ```
+  ```go
   // before
   fmt.Println(pinyin.Pinyin("中国人abc", pinyin.NewArgs()))
   [[zhong] [guo] [ren] [] [] []]
