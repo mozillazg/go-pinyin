@@ -2,6 +2,7 @@ package pinyin_test
 
 import (
 	"fmt"
+
 	"github.com/mozillazg/go-pinyin"
 )
 
@@ -83,6 +84,36 @@ func ExamplePinyin_heteronym() {
 	a.Style = pinyin.Tone2
 	fmt.Println(pinyin.Pinyin(hans, a))
 	// Output: [[zho1ng zho4ng] [guo2] [re2n]]
+}
+
+func ExamplePinyin_fallbackCustom1() {
+	hans := "中国人abc"
+	a := pinyin.NewArgs()
+	a.Fallback = func(r rune, a pinyin.Args) []string {
+		return []string{string(r + 1)}
+	}
+	fmt.Println(pinyin.Pinyin(hans, a))
+	// Output: [[zhong] [guo] [ren] [b] [c] [d]]
+}
+
+func ExamplePinyin_fallbackCustom2() {
+	hans := "中国人アイウ"
+	a := pinyin.NewArgs()
+	a.Fallback = func(r rune, a pinyin.Args) []string {
+		data := map[rune][]string{
+			'ア': {"a"},
+			'イ': {"i"},
+			'ウ': {"u"},
+		}
+		s, ok := data[r]
+		if ok {
+			return s
+		} else {
+			return []string{}
+		}
+	}
+	fmt.Println(pinyin.Pinyin(hans, a))
+	// Output: [[zhong] [guo] [ren] [a] [i] [u]]
 }
 
 func ExampleLazyPinyin() {
