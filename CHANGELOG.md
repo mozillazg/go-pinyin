@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.5.0 (2016-mm-dd)
+
+* **CHANGE** 改为使用来自 [pinyin-data](https://github.com/mozillazg/pinyin-data) 的拼音数据。
+
+
 ## 0.4.0 (2016-01-29)
 
 * **NEW** `Args` 结构体新增 field: `Fallback func(r rune, a Args) []string`
