@@ -1,6 +1,18 @@
 # Changelog
 
 
+## 0.5.0 (2016-03-12)
+
+* **CHANGE** 改为使用来自 [pinyin-data](https://github.com/mozillazg/pinyin-data) 的拼音数据。
+* **NEW** 命令行程序支持从标准输入读取数据（支持管道和重定向输入）:
+  ```shell
+  $ echo "你好" | pinyin
+  nǐ hǎo
+  $ pinyin < hello.txt
+  nǐ hǎo
+  ```
+
+
 ## 0.4.0 (2016-01-29)
 
 * **NEW** `Args` 结构体新增 field: `Fallback func(r rune, a Args) []string`
