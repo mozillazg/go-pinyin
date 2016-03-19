@@ -5,6 +5,7 @@
 
 * **CHANGE** 改为使用来自 [pinyin-data](https://github.com/mozillazg/pinyin-data) 的拼音数据。
 * **NEW** 命令行程序支持从标准输入读取数据（支持管道和重定向输入）:
+
   ```shell
   $ echo "你好" | pinyin
   nǐ hǎo
