@@ -2,7 +2,7 @@ package pinyin_test
 
 import (
 	"fmt"
-
+	"strings"
 	"github.com/mozillazg/go-pinyin"
 )
 
@@ -94,6 +94,22 @@ func ExamplePinyin_fallbackCustom1() {
 	}
 	fmt.Println(pinyin.Pinyin(hans, a))
 	// Output: [[zhong] [guo] [ren] [b] [c] [d]]
+}
+
+func ExamplePinyin_firstLetterStringLowerCase() {
+	hans := "A中国人abc"
+	a := pinyin.NewArgs()
+	a.Style = pinyin.FirstLetter
+	a.Fallback = func(r rune, a pinyin.Args) []string {
+		return []string{string(r + 0)}
+	}
+	nested_arr := pinyin.Pinyin(hans, a)
+	var result string
+	for _, element := range nested_arr {
+		result += strings.Join(element, "")
+	}
+	fmt.Println(strings.ToLower(result))
+	// Output: azgrabc
 }
 
 func ExamplePinyin_fallbackCustom2() {
