@@ -1,9 +1,9 @@
 package pinyin_test
 
 import (
+	"."
 	"fmt"
 	"strings"
-	"github.com/mozillazg/go-pinyin"
 )
 
 func ExamplePinyin_default() {
@@ -110,6 +110,12 @@ func ExamplePinyin_firstLetterStringLowerCase() {
 	}
 	fmt.Println(strings.ToLower(result))
 	// Output: azgrabc
+}
+
+func ExamplePinyin_simplePinyin() {
+	hans := "A中国人abc1"
+	fmt.Println(pinyin.SimplePinyin(hans, false))
+	// Output: Azgrabc1
 }
 
 func ExamplePinyin_fallbackCustom2() {

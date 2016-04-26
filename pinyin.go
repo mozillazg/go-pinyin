@@ -201,3 +201,21 @@ func Slug(s string, a Args) string {
 	separator := a.Separator
 	return strings.Join(LazyPinyin(s, a), separator)
 }
+
+//返回汉字首字母,并且保留输入文字中的非汉字, 可以选择是否强制输出全小写字母
+func SimplePinyin(s string, isLowercase bool) string {
+	a := NewArgs()
+	a.Style = FirstLetter
+	a.Fallback = func(r rune, a Args) []string {
+		return []string{string(r + 0)}
+	}
+	nested_arr := Pinyin(s, a)
+	var result string
+	for _, element := range nested_arr {
+		result += strings.Join(element, "")
+	}
+	if isLowercase {
+		return strings.ToLower(result)
+	}
+	return result
+}
