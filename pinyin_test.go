@@ -11,14 +11,13 @@ type testCase struct {
 	result [][]string
 }
 
-func testPinyin(s string, d []testCase, f pinyinFunc) (t *testing.T) {
+func testPinyin(t *testing.T, s string, d []testCase, f pinyinFunc) {
 	for _, tc := range d {
 		v := f(s, tc.args)
 		if !reflect.DeepEqual(v, tc.result) {
 			t.Errorf("Expected %s, got %s", tc.result, v)
 		}
 	}
-	return t
 }
 
 func TestPinyin(t *testing.T) {
@@ -125,7 +124,7 @@ func TestPinyin(t *testing.T) {
 		},
 	}
 
-	testPinyin(hans, testData, Pinyin)
+	testPinyin(t, hans, testData, Pinyin)
 
 	// 测试不是多音字的 Heteronym
 	hans = "你"
@@ -143,7 +142,7 @@ func TestPinyin(t *testing.T) {
 			},
 		},
 	}
-	testPinyin(hans, testData, Pinyin)
+	testPinyin(t, hans, testData, Pinyin)
 }
 
 func TestNoneHans(t *testing.T) {
@@ -208,43 +207,6 @@ func TestFinal(t *testing.T) {
 	}
 }
 
-// `yu`, `y`, `w` 不是声母
-func TestNewInitials(t *testing.T) {
-	hans := "鱼"
-	testData := []testCase{
-		testCase{
-			Args{Style: Initials},
-			[][]string{
-				[]string{""},
-			},
-		},
-		testCase{
-			Args{Style: Finals},
-			[][]string{
-				[]string{"yu"},
-			},
-		},
-	}
-	testPinyin(hans, testData, Pinyin)
-
-	hans = "五"
-	testData = []testCase{
-		testCase{
-			Args{Style: Initials},
-			[][]string{
-				[]string{""},
-			},
-		},
-		testCase{
-			Args{Style: Finals},
-			[][]string{
-				[]string{"wu"},
-			},
-		},
-	}
-	testPinyin(hans, testData, Pinyin)
-}
-
 func TestFallback(t *testing.T) {
 	hans := "中国人abc"
 	testData := []testCase{
@@ -291,5 +253,54 @@ func TestFallback(t *testing.T) {
 			},
 		},
 	}
-	testPinyin(hans, testData, Pinyin)
+	testPinyin(t, hans, testData, Pinyin)
+}
+
+type testItem struct {
+	hans   string
+	args   Args
+	result [][]string
+}
+
+func testPinyinUpdate(t *testing.T, d []testItem, f pinyinFunc) {
+	for _, tc := range d {
+		v := f(tc.hans, tc.args)
+		if !reflect.DeepEqual(v, tc.result) {
+			t.Errorf("Expected %s, got %s", tc.result, v)
+		}
+	}
+}
+
+func TestUpdated(t *testing.T) {
+	testData := []testItem{
+		// 误把 yu 放到声母列表了
+		testItem{"鱼", Args{Style: Tone2}, [][]string{[]string{"yu2"}}},
+		testItem{"鱼", Args{Style: Finals}, [][]string{[]string{"v"}}},
+		testItem{"雨", Args{Style: Tone2}, [][]string{[]string{"yu3"}}},
+		testItem{"雨", Args{Style: Finals}, [][]string{[]string{"v"}}},
+		testItem{"元", Args{Style: Tone2}, [][]string{[]string{"yua2n"}}},
+		testItem{"元", Args{Style: Finals}, [][]string{[]string{"van"}}},
+		// y, w 也不是拼音, yu的韵母是v, yi的韵母是i, wu的韵母是u
+		testItem{"呀", Args{Style: Initials}, [][]string{[]string{""}}},
+		testItem{"呀", Args{Style: Tone2}, [][]string{[]string{"ya"}}},
+		testItem{"呀", Args{Style: Finals}, [][]string{[]string{"ia"}}},
+		testItem{"无", Args{Style: Initials}, [][]string{[]string{""}}},
+		testItem{"无", Args{Style: Tone2}, [][]string{[]string{"wu2"}}},
+		testItem{"无", Args{Style: Finals}, [][]string{[]string{"u"}}},
+		testItem{"衣", Args{Style: Tone2}, [][]string{[]string{"yi1"}}},
+		testItem{"衣", Args{Style: Finals}, [][]string{[]string{"i"}}},
+		testItem{"万", Args{Style: Tone2}, [][]string{[]string{"wa4n"}}},
+		testItem{"万", Args{Style: Finals}, [][]string{[]string{"uan"}}},
+		// ju, qu, xu 的韵母应该是 v
+		testItem{"具", Args{Style: FinalsTone}, [][]string{[]string{"ǜ"}}},
+		testItem{"具", Args{Style: FinalsTone2}, [][]string{[]string{"v4"}}},
+		testItem{"具", Args{Style: Finals}, [][]string{[]string{"v"}}},
+		testItem{"取", Args{Style: FinalsTone}, [][]string{[]string{"ǚ"}}},
+		testItem{"取", Args{Style: FinalsTone2}, [][]string{[]string{"v3"}}},
+		testItem{"取", Args{Style: Finals}, [][]string{[]string{"v"}}},
+		testItem{"徐", Args{Style: FinalsTone}, [][]string{[]string{"ǘ"}}},
+		testItem{"徐", Args{Style: FinalsTone2}, [][]string{[]string{"v2"}}},
+		testItem{"徐", Args{Style: Finals}, [][]string{[]string{"v"}}},
+	}
+	testPinyinUpdate(t, testData, Pinyin)
 }
