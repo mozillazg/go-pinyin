@@ -149,6 +149,7 @@ func toFixed(p string, a Args) string {
 	if a.Style == Initials {
 		return initial(p)
 	}
+	origP := p
 
 	// 替换拼音中的带声调字符
 	py := rePhoneticSymbol.ReplaceAllStringFunc(p, func(m string) string {
@@ -170,10 +171,18 @@ func toFixed(p string, a Args) string {
 	switch a.Style {
 	// 首字母
 	case FirstLetter:
-		py = string([]byte(py)[0])
+		py = py[:1]
 	// 韵母
 	case Finals, FinalsTone, FinalsTone2:
-		py = final(py)
+		// 转换为 []rune unicode 编码用于获取第一个拼音字符
+		// 因为 string 是 utf-8 编码不方便获取第一个拼音字符
+		rs := []rune(origP)
+		switch string(rs[0]) {
+		// 因为鼻音没有声母所以不需要去掉声母部分
+		case "ḿ", "ń", "ň", "ǹ":
+		default:
+			py = final(py)
+		}
 	}
 	return py
 }

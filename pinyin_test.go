@@ -301,6 +301,24 @@ func TestUpdated(t *testing.T) {
 		testItem{"徐", Args{Style: FinalsTone}, [][]string{[]string{"ǘ"}}},
 		testItem{"徐", Args{Style: FinalsTone2}, [][]string{[]string{"v2"}}},
 		testItem{"徐", Args{Style: Finals}, [][]string{[]string{"v"}}},
+		// # ń
+		testItem{"嗯", Args{Style: Normal}, [][]string{[]string{"n"}}},
+		testItem{"嗯", Args{Style: Tone}, [][]string{[]string{"ń"}}},
+		testItem{"嗯", Args{Style: Tone2}, [][]string{[]string{"n2"}}},
+		testItem{"嗯", Args{Style: Initials}, [][]string{[]string{""}}},
+		testItem{"嗯", Args{Style: FirstLetter}, [][]string{[]string{"n"}}},
+		testItem{"嗯", Args{Style: Finals}, [][]string{[]string{"n"}}},
+		testItem{"嗯", Args{Style: FinalsTone}, [][]string{[]string{"ń"}}},
+		testItem{"嗯", Args{Style: FinalsTone2}, [][]string{[]string{"n2"}}},
+		// # ḿ  \u1e3f  U+1E3F
+		testItem{"呣", Args{Style: Normal}, [][]string{[]string{"m"}}},
+		testItem{"呣", Args{Style: Tone}, [][]string{[]string{"ḿ"}}},
+		testItem{"呣", Args{Style: Tone2}, [][]string{[]string{"m2"}}},
+		testItem{"呣", Args{Style: Initials}, [][]string{[]string{""}}},
+		testItem{"呣", Args{Style: FirstLetter}, [][]string{[]string{"m"}}},
+		testItem{"呣", Args{Style: Finals}, [][]string{[]string{"m"}}},
+		testItem{"呣", Args{Style: FinalsTone}, [][]string{[]string{"ḿ"}}},
+		testItem{"呣", Args{Style: FinalsTone2}, [][]string{[]string{"m2"}}},
 	}
 	testPinyinUpdate(t, testData, Pinyin)
 }
