@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
+	"github.com/mattn/go-isatty"
 	"github.com/mozillazg/go-pinyin"
-	"golang.org/x/crypto/ssh/terminal"
 )
 
 func main() {
@@ -18,7 +18,7 @@ func main() {
 	args := pinyin.NewArgs()
 	args.Style = pinyin.Tone
 	stdin := []byte{}
-	if !terminal.IsTerminal(0) {
+	if !isatty.IsTerminal(os.Stdin.Fd()) {
 		stdin, _ = ioutil.ReadAll(os.Stdin)
 	}
 	if len(stdin) > 0 {
