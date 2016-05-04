@@ -38,7 +38,7 @@ const (
 )
 
 // 声母表
-var initials = strings.Split(
+var initialArray = strings.Split(
 	"b,p,m,f,d,t,n,l,g,k,h,j,q,x,r,zh,ch,sh,z,c,s",
 	",",
 )
@@ -83,6 +83,15 @@ var Fallback = func(r rune, a Args) []string {
 	return []string{}
 }
 
+var finalExceptionsMap = map[string]string{
+	"ū": "ǖ",
+	"ú": "ǘ",
+	"ǔ": "ǚ",
+	"ù": "ǜ",
+}
+var reFinalExceptions = regexp.MustCompile("^(j|q|x)(ū|ú|ǔ|ù)$")
+var reFinal2Exceptions = regexp.MustCompile("^(j|q|x)u(\\d?)$")
+
 // NewArgs 返回包含默认配置的 `Args`
 func NewArgs() Args {
 	return Args{Style, Heteronym, Separator, Fallback}
@@ -91,7 +100,7 @@ func NewArgs() Args {
 // 获取单个拼音中的声母
 func initial(p string) string {
 	s := ""
-	for _, v := range initials {
+	for _, v := range initialArray {
 		if strings.HasPrefix(p, v) {
 			s = v
 			break
@@ -102,17 +111,45 @@ func initial(p string) string {
 
 // 获取单个拼音中的韵母
 func final(p string) string {
-	i := initial(p)
-	if i == "" {
-		return p
+	n := initial(p)
+	if n == "" {
+		return handleYW(p)
 	}
-	return strings.Join(strings.SplitN(p, i, 2), "")
+
+	// 特例 j/q/x
+	matches := reFinalExceptions.FindStringSubmatch(p)
+	// jū -> jǖ
+	if len(matches) == 3 && matches[1] != "" && matches[2] != "" {
+		v, _ := finalExceptionsMap[matches[2]]
+		return v
+	}
+	// ju -> jv, ju1 -> jv1
+	p = reFinal2Exceptions.ReplaceAllString(p, "${1}v$2")
+	return strings.Join(strings.SplitN(p, n, 2), "")
+}
+
+// 处理 y, w
+func handleYW(p string) string {
+	// 特例 y/w
+	if strings.HasPrefix(p, "yu") {
+		p = "v" + p[2:] // yu -> v
+	} else if strings.HasPrefix(p, "yi") {
+		p = p[1:] // yi -> i
+	} else if strings.HasPrefix(p, "y") {
+		p = "i" + p[1:] // y -> i
+	} else if strings.HasPrefix(p, "wu") {
+		p = p[1:] // wu -> u
+	} else if strings.HasPrefix(p, "w") {
+		p = "u" + p[1:] // w -> u
+	}
+	return p
 }
 
 func toFixed(p string, a Args) string {
 	if a.Style == Initials {
 		return initial(p)
 	}
+	origP := p
 
 	// 替换拼音中的带声调字符
 	py := rePhoneticSymbol.ReplaceAllStringFunc(p, func(m string) string {
@@ -134,10 +171,18 @@ func toFixed(p string, a Args) string {
 	switch a.Style {
 	// 首字母
 	case FirstLetter:
-		py = string([]byte(py)[0])
+		py = py[:1]
 	// 韵母
 	case Finals, FinalsTone, FinalsTone2:
-		py = final(py)
+		// 转换为 []rune unicode 编码用于获取第一个拼音字符
+		// 因为 string 是 utf-8 编码不方便获取第一个拼音字符
+		rs := []rune(origP)
+		switch string(rs[0]) {
+		// 因为鼻音没有声母所以不需要去掉声母部分
+		case "ḿ", "ń", "ň", "ǹ":
+		default:
+			py = final(py)
+		}
 	}
 	return py
 }

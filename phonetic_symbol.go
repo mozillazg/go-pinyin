@@ -28,5 +28,6 @@ var phoneticSymbol = map[string]string{
 	"ǜ": "v4",
 	"ń": "n2",
 	"ň": "n3",
-	"": "m2",
+	"ǹ": "n4",
+	"ḿ": "m2",
 }
