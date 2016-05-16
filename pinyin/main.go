@@ -7,18 +7,17 @@ import (
 	"os"
 	"strings"
 
+	"github.com/mattn/go-isatty"
 	"github.com/mozillazg/go-pinyin"
-	"golang.org/x/crypto/ssh/terminal"
 )
 
 func main() {
 	heteronym := flag.Bool("e", false, "启用多音字模式")
+	style := flag.String("s", "Tone", "指定拼音风格。可选值：Normal, Tone, Tone2, Initials, FirstLetter, Finals, FinalsTone, FinalsTone2")
 	flag.Parse()
 	hans := flag.Args()
-	args := pinyin.NewArgs()
-	args.Style = pinyin.Tone
 	stdin := []byte{}
-	if !terminal.IsTerminal(0) {
+	if !isatty.IsTerminal(os.Stdin.Fd()) {
 		stdin, _ = ioutil.ReadAll(os.Stdin)
 	}
 	if len(stdin) > 0 {
@@ -26,12 +25,33 @@ func main() {
 	}
 
 	if len(hans) == 0 {
-		fmt.Println("请至少输入一个汉字: pinyin HANS [HANS ...]")
+		fmt.Println("请至少输入一个汉字: pinyin [-e] [-s STYLE] HANS [HANS ...]")
 		os.Exit(1)
 	}
+
+	args := pinyin.NewArgs()
 	if *heteronym {
 		args.Heteronym = true
 	}
+	switch *style {
+	case "Normal":
+		args.Style = pinyin.Normal
+	case "Tone2":
+		args.Style = pinyin.Tone2
+	case "Initials":
+		args.Style = pinyin.Initials
+	case "FirstLetter":
+		args.Style = pinyin.FirstLetter
+	case "Finals":
+		args.Style = pinyin.Finals
+	case "FinalsTone":
+		args.Style = pinyin.FinalsTone
+	case "FinalsTone2":
+		args.Style = pinyin.FinalsTone2
+	default:
+		args.Style = pinyin.Tone
+	}
+
 	pys := pinyin.Pinyin(strings.Join(hans, ""), args)
 	for _, s := range pys {
 		fmt.Print(strings.Join(s, ","), " ")
