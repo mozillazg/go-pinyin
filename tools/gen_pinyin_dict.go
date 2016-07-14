@@ -14,10 +14,11 @@ type cmdArgs struct {
 	outputFile string
 }
 
-func gen_code(inFile *os.File, outFile *os.File) {
+func genCode(inFile *os.File, outFile *os.File) {
 	rd := bufio.NewReader(inFile)
 	output := `package pinyin
 
+// PinyinDict is data map
 // Warning: Auto-generated file, don't edit.
 var PinyinDict = map[int]string{
 `
@@ -76,5 +77,5 @@ func main() {
 	defer inFp.Close()
 	defer outFp.Close()
 
-	gen_code(inFp, outFp)
+	genCode(inFp, outFp)
 }

@@ -24,102 +24,102 @@ func TestPinyin(t *testing.T) {
 	hans := "中国人"
 	testData := []testCase{
 		// default
-		testCase{
+		{
 			Args{Style: Normal},
 			[][]string{
-				[]string{"zhong"},
-				[]string{"guo"},
-				[]string{"ren"},
+				{"zhong"},
+				{"guo"},
+				{"ren"},
 			},
 		},
 		// default
-		testCase{
+		{
 			NewArgs(),
 			[][]string{
-				[]string{"zhong"},
-				[]string{"guo"},
-				[]string{"ren"},
+				{"zhong"},
+				{"guo"},
+				{"ren"},
 			},
 		},
 		// Normal
-		testCase{
+		{
 			Args{Style: Normal},
 			[][]string{
-				[]string{"zhong"},
-				[]string{"guo"},
-				[]string{"ren"},
+				{"zhong"},
+				{"guo"},
+				{"ren"},
 			},
 		},
 		// Tone
-		testCase{
+		{
 			Args{Style: Tone},
 			[][]string{
-				[]string{"zhōng"},
-				[]string{"guó"},
-				[]string{"rén"},
+				{"zhōng"},
+				{"guó"},
+				{"rén"},
 			},
 		},
 		// Tone2
-		testCase{
+		{
 			Args{Style: Tone2},
 			[][]string{
-				[]string{"zho1ng"},
-				[]string{"guo2"},
-				[]string{"re2n"},
+				{"zho1ng"},
+				{"guo2"},
+				{"re2n"},
 			},
 		},
 		// Initials
-		testCase{
+		{
 			Args{Style: Initials},
 			[][]string{
-				[]string{"zh"},
-				[]string{"g"},
-				[]string{"r"},
+				{"zh"},
+				{"g"},
+				{"r"},
 			},
 		},
 		// FirstLetter
-		testCase{
+		{
 			Args{Style: FirstLetter},
 			[][]string{
-				[]string{"z"},
-				[]string{"g"},
-				[]string{"r"},
+				{"z"},
+				{"g"},
+				{"r"},
 			},
 		},
 		// Finals
-		testCase{
+		{
 			Args{Style: Finals},
 			[][]string{
-				[]string{"ong"},
-				[]string{"uo"},
-				[]string{"en"},
+				{"ong"},
+				{"uo"},
+				{"en"},
 			},
 		},
 		// FinalsTone
-		testCase{
+		{
 			Args{Style: FinalsTone},
 			[][]string{
-				[]string{"ōng"},
-				[]string{"uó"},
-				[]string{"én"},
+				{"ōng"},
+				{"uó"},
+				{"én"},
 			},
 		},
 		// FinalsTone2
-		testCase{
+		{
 			Args{Style: FinalsTone2},
 			[][]string{
-				[]string{"o1ng"},
-				[]string{"uo2"},
-				[]string{"e2n"},
+				{"o1ng"},
+				{"uo2"},
+				{"e2n"},
 			},
 		},
 		// Heteronym
-		testCase{
+		{
 			Args{Heteronym: true},
 			[][]string{
-				[]string{"zhong", "zhong"},
-				[]string{"guo"},
-				[]string{"ren"},
+				{"zhong", "zhong"},
+				{"guo"},
+				{"ren"},
 			},
 		},
 	}
@@ -129,16 +129,16 @@ func TestPinyin(t *testing.T) {
 	// 测试不是多音字的 Heteronym
 	hans = "你"
 	testData = []testCase{
-		testCase{
+		{
 			Args{},
 			[][]string{
-				[]string{"ni"},
+				{"ni"},
 			},
 		},
-		testCase{
+		{
 			Args{Heteronym: true},
 			[][]string{
-				[]string{"ni"},
+				{"ni"},
 			},
 		},
 	}
@@ -211,32 +211,32 @@ func TestFallback(t *testing.T) {
 	hans := "中国人abc"
 	testData := []testCase{
 		// default
-		testCase{
+		{
 			NewArgs(),
 			[][]string{
-				[]string{"zhong"},
-				[]string{"guo"},
-				[]string{"ren"},
+				{"zhong"},
+				{"guo"},
+				{"ren"},
 			},
 		},
 		// custom
-		testCase{
+		{
 			Args{
 				Fallback: func(r rune, a Args) []string {
 					return []string{"la"}
 				},
 			},
 			[][]string{
-				[]string{"zhong"},
-				[]string{"guo"},
-				[]string{"ren"},
-				[]string{"la"},
-				[]string{"la"},
-				[]string{"la"},
+				{"zhong"},
+				{"guo"},
+				{"ren"},
+				{"la"},
+				{"la"},
+				{"la"},
 			},
 		},
 		// custom
-		testCase{
+		{
 			Args{
 				Heteronym: true,
 				Fallback: func(r rune, a Args) []string {
@@ -244,12 +244,12 @@ func TestFallback(t *testing.T) {
 				},
 			},
 			[][]string{
-				[]string{"zhong", "zhong"},
-				[]string{"guo"},
-				[]string{"ren"},
-				[]string{"la", "wo"},
-				[]string{"la", "wo"},
-				[]string{"la", "wo"},
+				{"zhong", "zhong"},
+				{"guo"},
+				{"ren"},
+				{"la", "wo"},
+				{"la", "wo"},
+				{"la", "wo"},
 			},
 		},
 	}
@@ -274,51 +274,51 @@ func testPinyinUpdate(t *testing.T, d []testItem, f pinyinFunc) {
 func TestUpdated(t *testing.T) {
 	testData := []testItem{
 		// 误把 yu 放到声母列表了
-		testItem{"鱼", Args{Style: Tone2}, [][]string{[]string{"yu2"}}},
-		testItem{"鱼", Args{Style: Finals}, [][]string{[]string{"v"}}},
-		testItem{"雨", Args{Style: Tone2}, [][]string{[]string{"yu3"}}},
-		testItem{"雨", Args{Style: Finals}, [][]string{[]string{"v"}}},
-		testItem{"元", Args{Style: Tone2}, [][]string{[]string{"yua2n"}}},
-		testItem{"元", Args{Style: Finals}, [][]string{[]string{"van"}}},
+		{"鱼", Args{Style: Tone2}, [][]string{{"yu2"}}},
+		{"鱼", Args{Style: Finals}, [][]string{{"v"}}},
+		{"雨", Args{Style: Tone2}, [][]string{{"yu3"}}},
+		{"雨", Args{Style: Finals}, [][]string{{"v"}}},
+		{"元", Args{Style: Tone2}, [][]string{{"yua2n"}}},
+		{"元", Args{Style: Finals}, [][]string{{"van"}}},
 		// y, w 也不是拼音, yu的韵母是v, yi的韵母是i, wu的韵母是u
-		testItem{"呀", Args{Style: Initials}, [][]string{[]string{""}}},
-		testItem{"呀", Args{Style: Tone2}, [][]string{[]string{"ya"}}},
-		testItem{"呀", Args{Style: Finals}, [][]string{[]string{"ia"}}},
-		testItem{"无", Args{Style: Initials}, [][]string{[]string{""}}},
-		testItem{"无", Args{Style: Tone2}, [][]string{[]string{"wu2"}}},
-		testItem{"无", Args{Style: Finals}, [][]string{[]string{"u"}}},
-		testItem{"衣", Args{Style: Tone2}, [][]string{[]string{"yi1"}}},
-		testItem{"衣", Args{Style: Finals}, [][]string{[]string{"i"}}},
-		testItem{"万", Args{Style: Tone2}, [][]string{[]string{"wa4n"}}},
-		testItem{"万", Args{Style: Finals}, [][]string{[]string{"uan"}}},
+		{"呀", Args{Style: Initials}, [][]string{{""}}},
+		{"呀", Args{Style: Tone2}, [][]string{{"ya"}}},
+		{"呀", Args{Style: Finals}, [][]string{{"ia"}}},
+		{"无", Args{Style: Initials}, [][]string{{""}}},
+		{"无", Args{Style: Tone2}, [][]string{{"wu2"}}},
+		{"无", Args{Style: Finals}, [][]string{{"u"}}},
+		{"衣", Args{Style: Tone2}, [][]string{{"yi1"}}},
+		{"衣", Args{Style: Finals}, [][]string{{"i"}}},
+		{"万", Args{Style: Tone2}, [][]string{{"wa4n"}}},
+		{"万", Args{Style: Finals}, [][]string{{"uan"}}},
 		// ju, qu, xu 的韵母应该是 v
-		testItem{"具", Args{Style: FinalsTone}, [][]string{[]string{"ǜ"}}},
-		testItem{"具", Args{Style: FinalsTone2}, [][]string{[]string{"v4"}}},
-		testItem{"具", Args{Style: Finals}, [][]string{[]string{"v"}}},
-		testItem{"取", Args{Style: FinalsTone}, [][]string{[]string{"ǚ"}}},
-		testItem{"取", Args{Style: FinalsTone2}, [][]string{[]string{"v3"}}},
-		testItem{"取", Args{Style: Finals}, [][]string{[]string{"v"}}},
-		testItem{"徐", Args{Style: FinalsTone}, [][]string{[]string{"ǘ"}}},
-		testItem{"徐", Args{Style: FinalsTone2}, [][]string{[]string{"v2"}}},
-		testItem{"徐", Args{Style: Finals}, [][]string{[]string{"v"}}},
+		{"具", Args{Style: FinalsTone}, [][]string{{"ǜ"}}},
+		{"具", Args{Style: FinalsTone2}, [][]string{{"v4"}}},
+		{"具", Args{Style: Finals}, [][]string{{"v"}}},
+		{"取", Args{Style: FinalsTone}, [][]string{{"ǚ"}}},
+		{"取", Args{Style: FinalsTone2}, [][]string{{"v3"}}},
+		{"取", Args{Style: Finals}, [][]string{{"v"}}},
+		{"徐", Args{Style: FinalsTone}, [][]string{{"ǘ"}}},
+		{"徐", Args{Style: FinalsTone2}, [][]string{{"v2"}}},
+		{"徐", Args{Style: Finals}, [][]string{{"v"}}},
 		// # ń
-		testItem{"嗯", Args{Style: Normal}, [][]string{[]string{"n"}}},
-		testItem{"嗯", Args{Style: Tone}, [][]string{[]string{"ń"}}},
-		testItem{"嗯", Args{Style: Tone2}, [][]string{[]string{"n2"}}},
-		testItem{"嗯", Args{Style: Initials}, [][]string{[]string{""}}},
-		testItem{"嗯", Args{Style: FirstLetter}, [][]string{[]string{"n"}}},
-		testItem{"嗯", Args{Style: Finals}, [][]string{[]string{"n"}}},
-		testItem{"嗯", Args{Style: FinalsTone}, [][]string{[]string{"ń"}}},
-		testItem{"嗯", Args{Style: FinalsTone2}, [][]string{[]string{"n2"}}},
+		{"嗯", Args{Style: Normal}, [][]string{{"n"}}},
+		{"嗯", Args{Style: Tone}, [][]string{{"ń"}}},
+		{"嗯", Args{Style: Tone2}, [][]string{{"n2"}}},
+		{"嗯", Args{Style: Initials}, [][]string{{""}}},
+		{"嗯", Args{Style: FirstLetter}, [][]string{{"n"}}},
+		{"嗯", Args{Style: Finals}, [][]string{{"n"}}},
+		{"嗯", Args{Style: FinalsTone}, [][]string{{"ń"}}},
+		{"嗯", Args{Style: FinalsTone2}, [][]string{{"n2"}}},
 		// # ḿ  \u1e3f  U+1E3F
-		testItem{"呣", Args{Style: Normal}, [][]string{[]string{"m"}}},
-		testItem{"呣", Args{Style: Tone}, [][]string{[]string{"ḿ"}}},
-		testItem{"呣", Args{Style: Tone2}, [][]string{[]string{"m2"}}},
-		testItem{"呣", Args{Style: Initials}, [][]string{[]string{""}}},
-		testItem{"呣", Args{Style: FirstLetter}, [][]string{[]string{"m"}}},
-		testItem{"呣", Args{Style: Finals}, [][]string{[]string{"m"}}},
-		testItem{"呣", Args{Style: FinalsTone}, [][]string{[]string{"ḿ"}}},
-		testItem{"呣", Args{Style: FinalsTone2}, [][]string{[]string{"m2"}}},
+		{"呣", Args{Style: Normal}, [][]string{{"m"}}},
+		{"呣", Args{Style: Tone}, [][]string{{"ḿ"}}},
+		{"呣", Args{Style: Tone2}, [][]string{{"m2"}}},
+		{"呣", Args{Style: Initials}, [][]string{{""}}},
+		{"呣", Args{Style: FirstLetter}, [][]string{{"m"}}},
+		{"呣", Args{Style: Finals}, [][]string{{"m"}}},
+		{"呣", Args{Style: FinalsTone}, [][]string{{"ḿ"}}},
+		{"呣", Args{Style: FinalsTone2}, [][]string{{"m2"}}},
 	}
 	testPinyinUpdate(t, testData, Pinyin)
 }

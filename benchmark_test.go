@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-var hans500 string = strings.Replace(strings.Replace(`
+var hans500 = strings.Replace(strings.Replace(`
 的、一、是、在、不、了、有、和、人、这、中、大、为、上、个、国、我、以、要、他、
 时、来、用、们、生、到、作、地、于、出、就、分、对、成、会、可、主、发、年、动、
 同、工、也、能、下、过、子、说、产、种、面、而、方、后、多、定、行、学、法、所、

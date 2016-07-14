@@ -69,16 +69,16 @@ type Args struct {
 	Fallback func(r rune, a Args) []string
 }
 
-// 默认配置：风格
+// Style 默认配置：风格
 var Style = Normal
 
-// 默认配置：是否启用多音字模式
+// Heteronym 默认配置：是否启用多音字模式
 var Heteronym = false
 
-// 默认配置： `Slug` 中 Join 所用的分隔符
+// Separator 默认配置： `Slug` 中 Join 所用的分隔符
 var Separator = "-"
 
-// 默认配置: 如何处理没有拼音的字符(忽略这个字符)
+// Fallback 默认配置: 如何处理没有拼音的字符(忽略这个字符)
 var Fallback = func(r rune, a Args) []string {
 	return []string{}
 }
@@ -212,9 +212,8 @@ func SinglePinyin(r rune, a Args) []string {
 			pys = pys[:1]
 		}
 		return applyStyle(pys, a)
-	} else {
-		return pys
 	}
+	return pys
 }
 
 // Pinyin 汉字转拼音，支持多音字模式.
