@@ -218,9 +218,8 @@ func SinglePinyin(r rune, a Args) []string {
 
 // Pinyin 汉字转拼音，支持多音字模式.
 func Pinyin(s string, a Args) [][]string {
-	hans := []rune(s)
 	pys := [][]string{}
-	for _, r := range hans {
+	for _, r := range s {
 		py := SinglePinyin(r, a)
 		if len(py) > 0 {
 			pys = append(pys, py)
