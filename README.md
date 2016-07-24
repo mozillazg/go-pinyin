@@ -1,8 +1,6 @@
 go-pinyin
 =========
 
-[![Join the chat at https://gitter.im/mozillazg/go-pinyin](https://badges.gitter.im/mozillazg/go-pinyin.svg)](https://gitter.im/mozillazg/go-pinyin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Build Status](https://travis-ci.org/mozillazg/go-pinyin.svg?branch=master)](https://travis-ci.org/mozillazg/go-pinyin)
 [![Coverage Status](https://coveralls.io/repos/mozillazg/go-pinyin/badge.svg?branch=master)](https://coveralls.io/r/mozillazg/go-pinyin?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mozillazg/go-pinyin)](https://goreportcard.com/report/github.com/mozillazg/go-pinyin)
