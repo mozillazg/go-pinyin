@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.7.0 (2016-mm-dd)
+## 0.7.0 (2016-07-30)
 
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.2.0
 
