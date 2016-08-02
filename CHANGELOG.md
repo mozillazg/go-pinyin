@@ -1,9 +1,10 @@
 # Changelog
 
 
-## 0.7.0 (2016-07-30)
+## 0.7.0 (2016-08-02)
 
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.2.0
+* **Improved** golint and gofmt
 
 
 ## 0.6.0 (2016-05-14)
