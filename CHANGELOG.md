@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 0.8.0 (2016-08-19)
+
+* **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.3.0
+  * Fixed [#13](https://github.com/mozillazg/go-pinyin/issues/13)
+  * Fixed pinyin of 罗
+
+
 ## 0.7.0 (2016-08-02)
 
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.2.0
