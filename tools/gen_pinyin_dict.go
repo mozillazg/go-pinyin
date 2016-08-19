@@ -31,6 +31,10 @@ var PinyinDict = map[int]string{
 		} else if err != nil {
 			panic(err)
 		}
+		if strings.HasPrefix(line, "#") {
+			continue
+		}
+
 		// line: `U+4E2D: zhōng,zhòng  # 中`
 		dataSlice := strings.Split(line, "  #")
 		dataSlice = strings.Split(dataSlice[0], ": ")
