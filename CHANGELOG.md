@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.9.0 (2016-09-04):
+
+* **NEW** 新增 `func Convert(s string, a *Args) [][]string`
+* **NEW** 新增 `func LazyConvert(s string, a *Args) []string`
+
+之所以增加这两个函数是希望 `a` 参数支持 `nil`
+
+
+
 ## 0.8.0 (2016-08-19)
 
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.3.0

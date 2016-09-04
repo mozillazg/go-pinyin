@@ -6,6 +6,12 @@ import (
 	"github.com/mozillazg/go-pinyin"
 )
 
+func ExampleConvert() {
+	hans := "中国人"
+	fmt.Println("default:", pinyin.Convert(hans, nil))
+	// Output: default: [[zhong] [guo] [ren]]
+}
+
 func ExamplePinyin_default() {
 	hans := "中国人"
 	a := pinyin.NewArgs()

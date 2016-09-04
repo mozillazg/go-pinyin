@@ -45,6 +45,7 @@ import (
 
 func main() {
 	hans := "中国人"
+
 	// 默认
 	a := pinyin.NewArgs()
 	fmt.Println(pinyin.Pinyin(hans, a))
@@ -68,6 +69,15 @@ func main() {
 	a.Style = pinyin.Tone2
 	fmt.Println(pinyin.Pinyin(hans, a))
 	// [[zho1ng zho4ng] [guo2] [re2n]]
+
+	fmt.Println(pinyin.LazyPinyin(hans, pinyin.NewArgs()))
+	// [zhong guo ren]
+
+	fmt.Println(pinyin.Convert(hans, nil))
+	// [[zhong] [guo] [ren]]
+
+	fmt.Println(pinyin.LazyConvert(hans, nil))
+	// [zhong guo ren]
 }
 ```
 
@@ -78,3 +88,9 @@ Related Projects
 * [hotoo/pinyin](https://github.com/hotoo/pinyin): 汉语拼音转换工具 Node.js/JavaScript 版。
 * [mozillazg/python-pinyin](https://github.com/mozillazg/python-pinyin): 汉语拼音转换工具 Python 版。
 * [mozillazg/rust-pinyin](https://github.com/mozillazg/rust-pinyin): 汉语拼音转换工具 Rust 版。
+
+
+License
+---------
+
+Under the MIT License.

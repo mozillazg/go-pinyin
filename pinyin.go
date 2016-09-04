@@ -7,7 +7,7 @@ import (
 
 // Meta
 const (
-	Version   = "0.8.0"
+	Version   = "0.9.0"
 	Author    = "mozillazg, 闲耘"
 	License   = "MIT"
 	Copyright = "Copyright (c) 2016 mozillazg, 闲耘"
@@ -240,7 +240,26 @@ func LazyPinyin(s string, a Args) []string {
 }
 
 // Slug join `LazyPinyin` 的返回值.
+// 建议改用 https://github.com/mozillazg/go-slugify
 func Slug(s string, a Args) string {
 	separator := a.Separator
 	return strings.Join(LazyPinyin(s, a), separator)
+}
+
+// Convert 跟 Pinyin 的唯一区别就是 a 参数可以是 nil
+func Convert(s string, a *Args) [][]string {
+	if a == nil {
+		args := NewArgs()
+		a = &args
+	}
+	return Pinyin(s, *a)
+}
+
+// LazyConvert 跟 LazyPinyin 的唯一区别就是 a 参数可以是 nil
+func LazyConvert(s string, a *Args) []string {
+	if a == nil {
+		args := NewArgs()
+		a = &args
+	}
+	return LazyPinyin(s, *a)
 }
