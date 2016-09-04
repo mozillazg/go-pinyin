@@ -322,3 +322,33 @@ func TestUpdated(t *testing.T) {
 	}
 	testPinyinUpdate(t, testData, Pinyin)
 }
+
+func TestConvert(t *testing.T) {
+	s := "中国人"
+	v := Convert(s, nil)
+	value := [][]string{{"zhong"}, {"guo"}, {"ren"}}
+	if !reflect.DeepEqual(v, value) {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+
+	a := NewArgs()
+	v = Convert(s, &a)
+	if !reflect.DeepEqual(v, value) {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+}
+
+func TestLazyConvert(t *testing.T) {
+	s := "中国人"
+	v := LazyConvert(s, nil)
+	value := []string{"zhong", "guo", "ren"}
+	if !reflect.DeepEqual(v, value) {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+
+	a := NewArgs()
+	v = LazyConvert(s, &a)
+	if !reflect.DeepEqual(v, value) {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+}

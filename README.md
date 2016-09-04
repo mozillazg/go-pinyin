@@ -45,6 +45,7 @@ import (
 
 func main() {
 	hans := "中国人"
+
 	// 默认
 	a := pinyin.NewArgs()
 	fmt.Println(pinyin.Pinyin(hans, a))
@@ -68,6 +69,15 @@ func main() {
 	a.Style = pinyin.Tone2
 	fmt.Println(pinyin.Pinyin(hans, a))
 	// [[zho1ng zho4ng] [guo2] [re2n]]
+
+	fmt.Println(pinyin.Pinyin(hans, pinyin.NewArgs()))
+	// [zhong guo ren]
+
+	fmt.Println(pinyin.Convert(hans, nil))
+	// [[zhong] [guo] [ren]]
+
+	fmt.Println(pinyin.LazyConvert(hans, nil))
+	// [zhong guo ren]
 }
 ```
 
