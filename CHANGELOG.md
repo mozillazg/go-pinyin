@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.9.0 (2016-mm-dd):
+## 0.9.0 (2016-09-04):
 
 * **NEW** 新增 `func Convert(s string, a *Args) [][]string`
 * **NEW** 新增 `func LazyConvert(s string, a *Args) []string`
