@@ -293,3 +293,18 @@ func TestFallback(t *testing.T) {
 	}
 	testPinyin(hans, testData, Pinyin)
 }
+
+func TestSimplePinyin(t *testing.T) {
+	s := "A中国人abc1"
+	v := SimplePinyin(s, false)
+	value := "Azgrabc1"
+	if v != value {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+
+	lowerV := SimplePinyin(s, true)
+	lowercaseValue := "azgrabc1"
+	if lowerV != lowercaseValue {
+		t.Errorf("Expected %s, got %s", value, lowerV)
+	}
+}
