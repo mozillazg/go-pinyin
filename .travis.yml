@@ -21,4 +21,4 @@ script:
   - go run pinyin/main.go -s Normal abc
   - echo "abc" | go run pinyin/main.go
   - echo "abc" > abc.txt && go run pinyin/main.go < abc.txt
-  - $HOME/gopath/bin/goveralls -repotoken WAzmh3gmiQEUYEHM2wkwSH4oTrshvMmll
+  - $HOME/gopath/bin/goveralls -service=travis-ci -v -package .
