@@ -7,7 +7,7 @@ import (
 
 // Meta
 const (
-	Version   = "0.9.0"
+	Version   = "0.10.0"
 	Author    = "mozillazg, 闲耘"
 	License   = "MIT"
 	Copyright = "Copyright (c) 2016 mozillazg, 闲耘"

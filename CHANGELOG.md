@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.10.0 (2016-10-18)
+
+* **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.4.0
+
+
 ## 0.9.0 (2016-09-04):
 
 * **NEW** 新增 `func Convert(s string, a *Args) [][]string`
@@ -13,7 +18,7 @@
 ## 0.8.0 (2016-08-19)
 
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.3.0
-  * Fixed [#13](https://github.com/mozillazg/go-pinyin/issues/13)
+  * Fixed [#13](https://github.com/mozillazg/go-pinyin/issues/13) . thanks [@aisq2008](https://github.com/aisq2008)
   * Fixed pinyin of 罗
 
 
