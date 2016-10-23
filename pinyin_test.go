@@ -319,6 +319,10 @@ func TestUpdated(t *testing.T) {
 		{"呣", Args{Style: Finals}, [][]string{{"m"}}},
 		{"呣", Args{Style: FinalsTone}, [][]string{{"ḿ"}}},
 		{"呣", Args{Style: FinalsTone2}, [][]string{{"m2"}}},
+		// 去除 0
+		{"啊", Args{Style: Tone2}, [][]string{{"a"}}},
+		{"侵略", Args{Style: Tone2}, [][]string{{"qi1n"}, {"lve4"}}},
+		{"侵略", Args{Style: FinalsTone2}, [][]string{{"i1n"}, {"ve4"}}},
 	}
 	testPinyinUpdate(t, testData, Pinyin)
 }

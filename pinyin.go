@@ -17,12 +17,12 @@ const (
 const (
 	Normal      = 0 // 普通风格，不带声调（默认风格）。如： zhong guo
 	Tone        = 1 // 声调风格1，拼音声调在韵母第一个字母上。如： zhōng guó
-	Tone2       = 2 // 声调风格2，即拼音声调在各个拼音之后，用数字 [0-4] 进行表示。如： zho1ng guo2
+	Tone2       = 2 // 声调风格2，即拼音声调在各个韵母之后，用数字 [1-4] 进行表示。如： zho1ng guo2
 	Initials    = 3 // 声母风格，只返回各个拼音的声母部分。如： zh g
 	FirstLetter = 4 // 首字母风格，只返回拼音的首字母部分。如： z g
-	Finals      = 5 // 韵母风格1，只返回各个拼音的韵母部分，不带声调。如： ong uo
-	FinalsTone  = 6 // 韵母风格2，带声调，声调在韵母第一个字母上。如： ōng uó
-	FinalsTone2 = 7 // 韵母风格2，带声调，声调在各个拼音之后，用数字 [0-4] 进行表示。如： o1ng uo2
+	Finals      = 5 // 韵母风格，只返回各个拼音的韵母部分，不带声调。如： ong uo
+	FinalsTone  = 6 // 韵母风格1，带声调，声调在韵母第一个字母上。如： ōng uó
+	FinalsTone2 = 7 // 韵母风格2，带声调，声调在各个韵母之后，用数字 [1-4] 进行表示。如： o1ng uo2
 )
 
 // 拼音风格(兼容之前的版本)
@@ -56,7 +56,7 @@ var rePhoneticSymbolSource = func(m map[string]string) string {
 var rePhoneticSymbol = regexp.MustCompile("[" + rePhoneticSymbolSource + "]")
 
 // 匹配使用数字标识声调的字符的正则表达式
-var reTone2 = regexp.MustCompile("([aeoiuvnm])([0-4])$")
+var reTone2 = regexp.MustCompile("([aeoiuvnm])([1-4])$")
 
 // Args 配置信息
 type Args struct {
