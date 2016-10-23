@@ -68,6 +68,15 @@ func TestPinyin(t *testing.T) {
 				{"re2n"},
 			},
 		},
+		// Tone3
+		{
+			Args{Style: Tone3},
+			[][]string{
+				{"zhong1"},
+				{"guo2"},
+				{"ren2"},
+			},
+		},
 		// Initials
 		{
 			Args{Style: Initials},
@@ -111,6 +120,15 @@ func TestPinyin(t *testing.T) {
 				{"o1ng"},
 				{"uo2"},
 				{"e2n"},
+			},
+		},
+		// FinalsTone3
+		{
+			Args{Style: FinalsTone3},
+			[][]string{
+				{"ong1"},
+				{"uo2"},
+				{"en2"},
 			},
 		},
 		// Heteronym
@@ -275,54 +293,70 @@ func TestUpdated(t *testing.T) {
 	testData := []testItem{
 		// 误把 yu 放到声母列表了
 		{"鱼", Args{Style: Tone2}, [][]string{{"yu2"}}},
+		{"鱼", Args{Style: Tone3}, [][]string{{"yu2"}}},
 		{"鱼", Args{Style: Finals}, [][]string{{"v"}}},
 		{"雨", Args{Style: Tone2}, [][]string{{"yu3"}}},
+		{"雨", Args{Style: Tone3}, [][]string{{"yu3"}}},
 		{"雨", Args{Style: Finals}, [][]string{{"v"}}},
 		{"元", Args{Style: Tone2}, [][]string{{"yua2n"}}},
+		{"元", Args{Style: Tone3}, [][]string{{"yuan2"}}},
 		{"元", Args{Style: Finals}, [][]string{{"van"}}},
 		// y, w 也不是拼音, yu的韵母是v, yi的韵母是i, wu的韵母是u
 		{"呀", Args{Style: Initials}, [][]string{{""}}},
 		{"呀", Args{Style: Tone2}, [][]string{{"ya"}}},
+		{"呀", Args{Style: Tone3}, [][]string{{"ya"}}},
 		{"呀", Args{Style: Finals}, [][]string{{"ia"}}},
 		{"无", Args{Style: Initials}, [][]string{{""}}},
 		{"无", Args{Style: Tone2}, [][]string{{"wu2"}}},
+		{"无", Args{Style: Tone3}, [][]string{{"wu2"}}},
 		{"无", Args{Style: Finals}, [][]string{{"u"}}},
 		{"衣", Args{Style: Tone2}, [][]string{{"yi1"}}},
+		{"衣", Args{Style: Tone3}, [][]string{{"yi1"}}},
 		{"衣", Args{Style: Finals}, [][]string{{"i"}}},
 		{"万", Args{Style: Tone2}, [][]string{{"wa4n"}}},
+		{"万", Args{Style: Tone3}, [][]string{{"wan4"}}},
 		{"万", Args{Style: Finals}, [][]string{{"uan"}}},
 		// ju, qu, xu 的韵母应该是 v
 		{"具", Args{Style: FinalsTone}, [][]string{{"ǜ"}}},
 		{"具", Args{Style: FinalsTone2}, [][]string{{"v4"}}},
+		{"具", Args{Style: FinalsTone3}, [][]string{{"v4"}}},
 		{"具", Args{Style: Finals}, [][]string{{"v"}}},
 		{"取", Args{Style: FinalsTone}, [][]string{{"ǚ"}}},
 		{"取", Args{Style: FinalsTone2}, [][]string{{"v3"}}},
+		{"取", Args{Style: FinalsTone3}, [][]string{{"v3"}}},
 		{"取", Args{Style: Finals}, [][]string{{"v"}}},
 		{"徐", Args{Style: FinalsTone}, [][]string{{"ǘ"}}},
 		{"徐", Args{Style: FinalsTone2}, [][]string{{"v2"}}},
+		{"徐", Args{Style: FinalsTone3}, [][]string{{"v2"}}},
 		{"徐", Args{Style: Finals}, [][]string{{"v"}}},
 		// # ń
 		{"嗯", Args{Style: Normal}, [][]string{{"n"}}},
 		{"嗯", Args{Style: Tone}, [][]string{{"ń"}}},
 		{"嗯", Args{Style: Tone2}, [][]string{{"n2"}}},
+		{"嗯", Args{Style: Tone3}, [][]string{{"n2"}}},
 		{"嗯", Args{Style: Initials}, [][]string{{""}}},
 		{"嗯", Args{Style: FirstLetter}, [][]string{{"n"}}},
 		{"嗯", Args{Style: Finals}, [][]string{{"n"}}},
 		{"嗯", Args{Style: FinalsTone}, [][]string{{"ń"}}},
 		{"嗯", Args{Style: FinalsTone2}, [][]string{{"n2"}}},
+		{"嗯", Args{Style: FinalsTone3}, [][]string{{"n2"}}},
 		// # ḿ  \u1e3f  U+1E3F
 		{"呣", Args{Style: Normal}, [][]string{{"m"}}},
 		{"呣", Args{Style: Tone}, [][]string{{"ḿ"}}},
 		{"呣", Args{Style: Tone2}, [][]string{{"m2"}}},
+		{"呣", Args{Style: Tone3}, [][]string{{"m2"}}},
 		{"呣", Args{Style: Initials}, [][]string{{""}}},
 		{"呣", Args{Style: FirstLetter}, [][]string{{"m"}}},
 		{"呣", Args{Style: Finals}, [][]string{{"m"}}},
 		{"呣", Args{Style: FinalsTone}, [][]string{{"ḿ"}}},
 		{"呣", Args{Style: FinalsTone2}, [][]string{{"m2"}}},
+		{"呣", Args{Style: FinalsTone3}, [][]string{{"m2"}}},
 		// 去除 0
 		{"啊", Args{Style: Tone2}, [][]string{{"a"}}},
+		{"啊", Args{Style: Tone3}, [][]string{{"a"}}},
 		{"侵略", Args{Style: Tone2}, [][]string{{"qi1n"}, {"lve4"}}},
 		{"侵略", Args{Style: FinalsTone2}, [][]string{{"i1n"}, {"ve4"}}},
+		{"侵略", Args{Style: FinalsTone3}, [][]string{{"in1"}, {"ve4"}}},
 	}
 	testPinyinUpdate(t, testData, Pinyin)
 }
