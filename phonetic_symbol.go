@@ -22,7 +22,7 @@ var phoneticSymbol = map[string]string{
 	"ú": "u2",
 	"ǔ": "u3",
 	"ù": "u4",
-	"ü": "v0",
+	"ü": "v",
 	"ǘ": "v2",
 	"ǚ": "v3",
 	"ǜ": "v4",

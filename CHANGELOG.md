@@ -1,6 +1,24 @@
 # Changelog
 
 
+## 0.11.0 (2016-10-28)
+
+* **Changed** 不再使用 `0` 表示轻声（因为之前并没有正确的实现这个功能, 同时也觉得这个功能没必要）。
+  顺便修复了 Tone2 中 `ü` 标轻声的问题（像 `侵略 -> qi1n lv0e4` ）
+* **NEW** 新增 `Tone3` 和 `FinalsTone3` 拼音风格。
+
+        hans := "中国人"
+        args := pinyin.NewArgs()
+        args.Style = pinyin.Tone3
+        fmt.Println("Tone3:", pinyin.Pinyin(hans, args))
+        // Output: Tone3: [[zhong1] [guo2] [ren2]]
+
+        args.Style = pinyin.FinalsTone3
+        fmt.Println("FinalsTone3:", pinyin.Pinyin(hans, args))
+        // Output: FinalsTone3: [[ong1] [uo2] [en2]]
+
+
+
 ## 0.10.0 (2016-10-18)
 
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.4.0
