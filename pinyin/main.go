@@ -13,7 +13,7 @@ import (
 
 func main() {
 	heteronym := flag.Bool("e", false, "启用多音字模式")
-	style := flag.String("s", "Tone", "指定拼音风格。可选值：Normal, Tone, Tone2, Initials, FirstLetter, Finals, FinalsTone, FinalsTone2")
+	style := flag.String("s", "Tone", "指定拼音风格。可选值：Normal, Tone, Tone2, Tone3, Initials, FirstLetter, Finals, FinalsTone, FinalsTone2, FinalsTone3")
 	flag.Parse()
 	hans := flag.Args()
 	stdin := []byte{}
@@ -38,6 +38,8 @@ func main() {
 		args.Style = pinyin.Normal
 	case "Tone2":
 		args.Style = pinyin.Tone2
+	case "Tone3":
+		args.Style = pinyin.Tone3
 	case "Initials":
 		args.Style = pinyin.Initials
 	case "FirstLetter":
@@ -48,6 +50,8 @@ func main() {
 		args.Style = pinyin.FinalsTone
 	case "FinalsTone2":
 		args.Style = pinyin.FinalsTone2
+	case "FinalsTone3":
+		args.Style = pinyin.FinalsTone3
 	default:
 		args.Style = pinyin.Tone
 	}
