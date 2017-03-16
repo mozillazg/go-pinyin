@@ -18,7 +18,7 @@ before_install:
 
 script:
   - go run pinyin/main.go abc
-  - go run pinyin/main.go -s Normal abc
+  - go run pinyin/main.go -s zhao abc
   - echo "abc" | go run pinyin/main.go
   - echo "abc" > abc.txt && go run pinyin/main.go < abc.txt
   - $HOME/gopath/bin/goveralls -service=travis-ci -v -package .
