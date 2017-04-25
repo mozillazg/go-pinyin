@@ -1,6 +1,20 @@
 # Changelog
 
 
+## 0.12.0 (2017-04-25)
+
+
+* **NEW** 命令行程序支持通过 -s 指定新增的 `Tone3` 和 `FinalsTone3` 拼音风格
+
+        $ pinyin -s Tone3 请至少输入一个汉字
+        qing3 zhi4 shao3 shu1 ru4 yi1 ge4 han4 zi4
+
+        $ pinyin -s FinalsTone3 请至少输入一个汉字
+        ing3 i4 ao3 u1 u4 i1 e4 an4 i4
+
+* **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.4.1
+
+
 ## 0.11.0 (2016-10-28)
 
 * **Changed** 不再使用 `0` 表示轻声（因为之前并没有正确的实现这个功能, 同时也觉得这个功能没必要）。
