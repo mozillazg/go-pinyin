@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.12.0 (2016-mm-dd)
+## 0.12.0 (2017-04-25)
 
 
 * **NEW** 命令行程序支持通过 -s 指定新增的 `Tone3` 和 `FinalsTone3` 拼音风格
@@ -11,6 +11,8 @@
 
         $ pinyin -s FinalsTone3 请至少输入一个汉字
         ing3 i4 ao3 u1 u4 i1 e4 an4 i4
+
+* **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.4.1
 
 
 ## 0.11.0 (2016-10-28)
