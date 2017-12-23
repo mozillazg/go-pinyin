@@ -90,6 +90,12 @@ Related Projects
 * [mozillazg/rust-pinyin](https://github.com/mozillazg/rust-pinyin): 汉语拼音转换工具 Rust 版。
 
 
+pinyin data
+-----------------
+
+* 使用 [pinyin-data](https://github.com/mozillazg/pinyin-data) 的拼音数据
+
+
 License
 ---------
 
