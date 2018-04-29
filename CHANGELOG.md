@@ -1,7 +1,24 @@
 # Changelog
 
 
-## 0.12.0 (2017-04-25)
+## [0.13.0]
+
+* **Changed** 使用 [pinyin-data][pinyin-data] v0.5.1 的拼音数据
+* **Changed** 修改命令行工具 `-s` 参数的值(thanks [@wdscxsj][@wdscxsj] via [#19][#19]):
+    * `Normal` 改为 `zhao`
+    * `Tone` 改为 `zh4ao`
+    * `Tone2` 改为 `zha4o`
+    * `Tone3` 改为 `zhao4`
+    * `Initials` 改为 `zh`
+    * `FirstLetter` 改为 `z`
+    * `Finals` 改为 `ao`
+    * `FinalsTone` 改为 `4ao`
+    * `FinalsTone2` 改为 `a4o`
+    * `FinalsTone3` 改为 `ao4`
+* **Changed** 严格限制命令行参数中 `-s` 选项的值(thanks [@wdscxsj][@wdscxsj] via [#20][#20]):
+
+
+## [0.12.0] (2017-04-25)
 
 
 * **NEW** 命令行程序支持通过 -s 指定新增的 `Tone3` 和 `FinalsTone3` 拼音风格
@@ -15,7 +32,7 @@
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.4.1
 
 
-## 0.11.0 (2016-10-28)
+## [0.11.0] (2016-10-28)
 
 * **Changed** 不再使用 `0` 表示轻声（因为之前并没有正确的实现这个功能, 同时也觉得这个功能没必要）。
   顺便修复了 Tone2 中 `ü` 标轻声的问题（像 `侵略 -> qi1n lv0e4` ）
@@ -33,12 +50,12 @@
 
 
 
-## 0.10.0 (2016-10-18)
+## [0.10.0] (2016-10-18)
 
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.4.0
 
 
-## 0.9.0 (2016-09-04):
+## [0.9.0] (2016-09-04):
 
 * **NEW** 新增 `func Convert(s string, a *Args) [][]string`
 * **NEW** 新增 `func LazyConvert(s string, a *Args) []string`
@@ -47,20 +64,20 @@
 
 
 
-## 0.8.0 (2016-08-19)
+## [0.8.0] (2016-08-19)
 
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.3.0
   * Fixed [#13](https://github.com/mozillazg/go-pinyin/issues/13) . thanks [@aisq2008](https://github.com/aisq2008)
   * Fixed pinyin of 罗
 
 
-## 0.7.0 (2016-08-02)
+## [0.7.0] (2016-08-02)
 
 * **Changed** use [pinyin-data](https://github.com/mozillazg/pinyin-data) v0.2.0
 * **Improved** golint and gofmt
 
 
-## 0.6.0 (2016-05-14)
+## [0.6.0] (2016-05-14)
 
 * **NEW** 命令行程序支持指定拼音风格:
 
@@ -86,7 +103,7 @@
 
 
 
-## 0.5.0 (2016-03-12)
+## [0.5.0] (2016-03-12)
 
 * **CHANGE** 改为使用来自 [pinyin-data](https://github.com/mozillazg/pinyin-data) 的拼音数据。
 * **NEW** 命令行程序支持从标准输入读取数据（支持管道和重定向输入）:
@@ -99,7 +116,7 @@
   ```
 
 
-## 0.4.0 (2016-01-29)
+## [0.4.0] (2016-01-29)
 
 * **NEW** `Args` 结构体新增 field: `Fallback func(r rune, a Args) []string`
   用于处理没有拼音的字符（默认忽略没有拼音的字符）:
@@ -120,7 +137,7 @@
   ```
 
 
-## 0.3.0 (2015-12-29)
+## [0.3.0] (2015-12-29)
 
 * fix "当字符串中有非中文的时候，会出现下标越界的情况"(影响 `pinyin.LazyPinyin` 和 `pinyin.Slug` ([#1](https://github.com/mozillazg/go-pinyin/issues/1)))
 * 调整对非中文字符的处理：当遇到没有拼音的字符时，直接忽略
@@ -135,12 +152,12 @@
   ```
 
 
-## 0.2.1 (2015-08-26)
+## [0.2.1] (2015-08-26)
 
 * `yu`, `y`, `w` 不是声母
 
 
-## 0.2.0 (2015-01-04)
+## [0.2.0] (2015-01-04)
 
 * 新增 `func NewArgs() Args`
 * 解决 `Args.Separator` 无法赋值为 `""` 的 BUG
@@ -154,9 +171,30 @@
     * `FINALS_TONE` -> `FinalsTone`
     * `FINALS_TONE2` -> `FinalsTone2`
 
-## 0.1.1 (2014-12-07)
+## [0.1.1] (2014-12-07)
 * 更新拼音库
 
 
 ## 0.1.0 (2014-11-23)
 * Initial Release
+
+
+[pinyin-data]: https://github.com/mozillazg/pinyin-data
+[@wdscxsj]: https://github.com/wdscxsj
+[#19]: https://github.com/mozillazg/go-pinyin/pull/19
+[#20]: https://github.com/mozillazg/go-pinyin/pull/20
+
+[0.1.1]: https://github.com/mozillazg/go-pinyin/compare/v0.1.0...v0.1.1
+[0.2.0]: https://github.com/mozillazg/go-pinyin/compare/v0.1.1...v0.2.0
+[0.2.1]: https://github.com/mozillazg/go-pinyin/compare/v0.2.0...v0.2.1
+[0.3.0]: https://github.com/mozillazg/go-pinyin/compare/v0.2.1...v0.3.0
+[0.4.0]: https://github.com/mozillazg/go-pinyin/compare/v0.3.0...v0.4.0
+[0.5.0]: https://github.com/mozillazg/go-pinyin/compare/v0.4.0...v0.5.0
+[0.6.0]: https://github.com/mozillazg/go-pinyin/compare/v0.5.0...v0.6.0
+[0.7.0]: https://github.com/mozillazg/go-pinyin/compare/v0.6.0...v0.7.0
+[0.8.0]: https://github.com/mozillazg/go-pinyin/compare/v0.7.0...v0.8.0
+[0.9.0]: https://github.com/mozillazg/go-pinyin/compare/v0.8.0...v0.9.0
+[0.10.0]: https://github.com/mozillazg/go-pinyin/compare/v0.9.0...v0.10.0
+[0.11.0]: https://github.com/mozillazg/go-pinyin/compare/v0.10.0...v0.11.0
+[0.12.0]: https://github.com/mozillazg/go-pinyin/compare/v0.11.0...v0.12.0
+[0.13.0]: https://github.com/mozillazg/go-pinyin/compare/v0.12.0...v0.13.0
