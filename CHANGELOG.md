@@ -1,7 +1,7 @@
 # Changelog
 
 
-## [0.13.0]
+## [0.13.0] (2018-04-29)
 
 * **Changed** 使用 [pinyin-data][pinyin-data] v0.5.1 的拼音数据
 * **Changed** 修改命令行工具 `-s` 参数的值(thanks [@wdscxsj][@wdscxsj] via [#19][#19]):
