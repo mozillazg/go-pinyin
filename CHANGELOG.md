@@ -3,7 +3,7 @@
 
 ## [0.13.0] (2018-04-29)
 
-* **Changed** 使用 [pinyin-data][pinyin-data] v0.5.1 的拼音数据
+* **Changed** 使用 [pinyin-data][pinyin-data] v0.5.1 的拼音数据 (via [#30])
 * **Changed** 修改命令行工具 `-s` 参数的值(thanks [@wdscxsj][@wdscxsj] via [#19][#19]):
     * `Normal` 改为 `zhao`
     * `Tone` 改为 `zh4ao`
@@ -183,6 +183,7 @@
 [@wdscxsj]: https://github.com/wdscxsj
 [#19]: https://github.com/mozillazg/go-pinyin/pull/19
 [#20]: https://github.com/mozillazg/go-pinyin/pull/20
+[#30]: https://github.com/mozillazg/go-pinyin/pull/30
 
 [0.1.1]: https://github.com/mozillazg/go-pinyin/compare/v0.1.0...v0.1.1
 [0.2.0]: https://github.com/mozillazg/go-pinyin/compare/v0.1.1...v0.2.0
