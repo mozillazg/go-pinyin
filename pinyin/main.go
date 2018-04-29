@@ -13,7 +13,7 @@ import (
 
 func main() {
 	heteronym := flag.Bool("e", false, "启用多音字模式")
-	style := flag.String("s", "Tone", "指定拼音风格。可选值：Normal, Tone, Tone2, Tone3, Initials, FirstLetter, Finals, FinalsTone, FinalsTone2, FinalsTone3")
+	style := flag.String("s", "zh4ao", "指定拼音风格。可选值：zhao, zh4ao, zha4o, zhao4, zh, z, ao, 4ao, a4o, ao4")
 	flag.Parse()
 	hans := flag.Args()
 	stdin := []byte{}
@@ -25,7 +25,7 @@ func main() {
 	}
 
 	if len(hans) == 0 {
-		fmt.Println("请至少输入一个汉字: pinyin [-e] [-s STYLE] HANS [HANS ...]")
+		fmt.Fprintln(os.Stderr, "请至少输入一个汉字: pinyin [-e] [-s STYLE] HANS [HANS ...]")
 		os.Exit(1)
 	}
 
@@ -33,27 +33,24 @@ func main() {
 	if *heteronym {
 		args.Heteronym = true
 	}
-	switch *style {
-	case "Normal":
-		args.Style = pinyin.Normal
-	case "Tone2":
-		args.Style = pinyin.Tone2
-	case "Tone3":
-		args.Style = pinyin.Tone3
-	case "Initials":
-		args.Style = pinyin.Initials
-	case "FirstLetter":
-		args.Style = pinyin.FirstLetter
-	case "Finals":
-		args.Style = pinyin.Finals
-	case "FinalsTone":
-		args.Style = pinyin.FinalsTone
-	case "FinalsTone2":
-		args.Style = pinyin.FinalsTone2
-	case "FinalsTone3":
-		args.Style = pinyin.FinalsTone3
-	default:
-		args.Style = pinyin.Tone
+
+	styleValues := map[string]int{
+		"zhao":  pinyin.Normal,
+		"zh4ao": pinyin.Tone,
+		"zha4o": pinyin.Tone2,
+		"zhao4": pinyin.Tone3,
+		"zh":    pinyin.Initials,
+		"z":     pinyin.FirstLetter,
+		"ao":    pinyin.Finals,
+		"4ao":   pinyin.FinalsTone,
+		"a4o":   pinyin.FinalsTone2,
+		"ao4":   pinyin.FinalsTone3,
+	}
+	if value, ok := styleValues[*style]; !ok {
+		fmt.Fprintf(os.Stderr, "无效的拼音风格：%s\n", *style)
+		os.Exit(1)
+	} else {
+		args.Style = value
 	}
 
 	pys := pinyin.Pinyin(strings.Join(hans, ""), args)
