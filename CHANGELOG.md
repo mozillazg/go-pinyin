@@ -4,6 +4,8 @@
 ## [0.14.0] (2018-08-05)
 
 * **Changed** 使用 [pinyin-data][pinyin-data] v0.6.1 的拼音数据
+* **Changed** 命令行工具移到 `cmd/pinyin/` 目录下，现在需要改为使用
+  `go get -u github.com/mozillazg/go-pinyin/cmd/pinyin` 来安装命令行工具。
 
 
 ## [0.13.0] (2018-04-29)
@@ -204,3 +206,4 @@
 [0.11.0]: https://github.com/mozillazg/go-pinyin/compare/v0.10.0...v0.11.0
 [0.12.0]: https://github.com/mozillazg/go-pinyin/compare/v0.11.0...v0.12.0
 [0.13.0]: https://github.com/mozillazg/go-pinyin/compare/v0.12.0...v0.13.0
+[0.14.0]: https://github.com/mozillazg/go-pinyin/compare/v0.13.0...v0.14.0
