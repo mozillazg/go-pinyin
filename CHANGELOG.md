@@ -1,6 +1,11 @@
 # Changelog
 
 
+## [0.14.0] (2018-08-05)
+
+* **Changed** 使用 [pinyin-data][pinyin-data] v0.6.1 的拼音数据
+
+
 ## [0.13.0] (2018-04-29)
 
 * **Changed** 使用 [pinyin-data][pinyin-data] v0.5.1 的拼音数据 (via [#30])
