@@ -19,7 +19,7 @@ go get -u github.com/mozillazg/go-pinyin
 install CLI tool:
 
 ```
-go get -u github.com/mozillazg/go-pinyin/pinyin
+go get -u github.com/mozillazg/go-pinyin/cmd/pinyin
 $ pinyin 中国人
 zhōng guó rén
 ```
@@ -88,6 +88,12 @@ Related Projects
 * [hotoo/pinyin](https://github.com/hotoo/pinyin): 汉语拼音转换工具 Node.js/JavaScript 版。
 * [mozillazg/python-pinyin](https://github.com/mozillazg/python-pinyin): 汉语拼音转换工具 Python 版。
 * [mozillazg/rust-pinyin](https://github.com/mozillazg/rust-pinyin): 汉语拼音转换工具 Rust 版。
+
+
+pinyin data
+-----------------
+
+* 使用 [pinyin-data](https://github.com/mozillazg/pinyin-data) 的拼音数据
 
 
 License
