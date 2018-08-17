@@ -65,9 +65,10 @@ var reTone3 = regexp.MustCompile("^([a-z]+)([1-4])([a-z]*)$")
 
 // Args 配置信息
 type Args struct {
-	Style     int    // 拼音风格（默认： Normal)
-	Heteronym bool   // 是否启用多音字模式（默认：禁用）
-	Separator string // Slug 中使用的分隔符（默认：-)
+	Style      int    // 拼音风格（默认： Normal)
+	Heteronym  bool   // 是否启用多音字模式（默认：禁用）
+	Separator  string // Slug 中使用的分隔符（默认：-)
+	KeepSymbol bool   // 是否保留文字中的数字/英文
 
 	// 处理没有拼音的字符（默认忽略没有拼音的字符）
 	// 函数返回的 slice 的长度为0 则表示忽略这个字符
@@ -82,6 +83,9 @@ var Heteronym = false
 
 // Separator 默认配置： `Slug` 中 Join 所用的分隔符
 var Separator = "-"
+
+// 保留数字/英文
+var KeepSymbol = false
 
 // Fallback 默认配置: 如何处理没有拼音的字符(忽略这个字符)
 var Fallback = func(r rune, a Args) []string {
@@ -99,7 +103,7 @@ var reFinal2Exceptions = regexp.MustCompile("^(j|q|x)u(\\d?)$")
 
 // NewArgs 返回包含默认配置的 `Args`
 func NewArgs() Args {
-	return Args{Style, Heteronym, Separator, Fallback}
+	return Args{Style, Heteronym, Separator, KeepSymbol, Fallback}
 }
 
 // 获取单个拼音中的声母
@@ -231,6 +235,10 @@ func Pinyin(s string, a Args) [][]string {
 	pys := [][]string{}
 	for _, r := range s {
 		py := SinglePinyin(r, a)
+
+		if a.KeepSymbol && IsNumberOrLetter(r) {
+			py = append(py, string(r))
+		}
 		if len(py) > 0 {
 			pys = append(pys, py)
 		}
@@ -272,4 +280,18 @@ func LazyConvert(s string, a *Args) []string {
 		a = &args
 	}
 	return LazyPinyin(s, *a)
+}
+
+// 数字或字母
+func IsNumberOrLetter(n int32) bool {
+	switch {
+	case n >= 48 && n <= 57: // 数字
+		return true
+	case n >= 65 && n <= 90: // 大写字母
+		return true
+	case n >= 97 && n <= 122: // 小写字母
+		return true
+	default:
+		return false
+	}
 }
