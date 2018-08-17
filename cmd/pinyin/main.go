@@ -41,6 +41,7 @@ func main() {
 		"zhao4": pinyin.Tone3,
 		"zh":    pinyin.Initials,
 		"z":     pinyin.FirstLetter,
+		"zn":    pinyin.FirstKeepLetter,
 		"ao":    pinyin.Finals,
 		"4ao":   pinyin.FinalsTone,
 		"a4o":   pinyin.FinalsTone2,

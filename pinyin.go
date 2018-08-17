@@ -15,16 +15,17 @@ const (
 
 // 拼音风格(推荐)
 const (
-	Normal      = 0 // 普通风格，不带声调（默认风格）。如： zhong guo
-	Tone        = 1 // 声调风格1，拼音声调在韵母第一个字母上。如： zhōng guó
-	Tone2       = 2 // 声调风格2，即拼音声调在各个韵母之后，用数字 [1-4] 进行表示。如： zho1ng guo2
-	Tone3       = 8 // 声调风格3，即拼音声调在各个拼音之后，用数字 [1-4] 进行表示。如： zhong1 guo2
-	Initials    = 3 // 声母风格，只返回各个拼音的声母部分。如： zh g
-	FirstLetter = 4 // 首字母风格，只返回拼音的首字母部分。如： z g
-	Finals      = 5 // 韵母风格，只返回各个拼音的韵母部分，不带声调。如： ong uo
-	FinalsTone  = 6 // 韵母风格1，带声调，声调在韵母第一个字母上。如： ōng uó
-	FinalsTone2 = 7 // 韵母风格2，带声调，声调在各个韵母之后，用数字 [1-4] 进行表示。如： o1ng uo2
-	FinalsTone3 = 9 // 韵母风格3，带声调，声调在各个拼音之后，用数字 [1-4] 进行表示。如： ong1 uo2
+	Normal          = 0  // 普通风格，不带声调（默认风格）。如： zhong guo
+	Tone            = 1  // 声调风格1，拼音声调在韵母第一个字母上。如： zhōng guó
+	Tone2           = 2  // 声调风格2，即拼音声调在各个韵母之后，用数字 [1-4] 进行表示。如： zho1ng guo2
+	Tone3           = 8  // 声调风格3，即拼音声调在各个拼音之后，用数字 [1-4] 进行表示。如： zhong1 guo2
+	Initials        = 3  // 声母风格，只返回各个拼音的声母部分。如： zh g
+	FirstLetter     = 4  // 首字母风格，只返回拼音的首字母部分。如： z g
+	FirstKeepLetter = 10 // 首字母风格, 只返回拼音的首字母部分。如： z g , 同时保留原字符串中的英文/数字
+	Finals          = 5  // 韵母风格，只返回各个拼音的韵母部分，不带声调。如： ong uo
+	FinalsTone      = 6  // 韵母风格1，带声调，声调在韵母第一个字母上。如： ōng uó
+	FinalsTone2     = 7  // 韵母风格2，带声调，声调在各个韵母之后，用数字 [1-4] 进行表示。如： o1ng uo2
+	FinalsTone3     = 9  // 韵母风格3，带声调，声调在各个拼音之后，用数字 [1-4] 进行表示。如： ong1 uo2
 )
 
 // 拼音风格(兼容之前的版本)
@@ -161,7 +162,7 @@ func toFixed(p string, a Args) string {
 		symbol, _ := phoneticSymbol[m]
 		switch a.Style {
 		// 不包含声调
-		case Normal, FirstLetter, Finals:
+		case Normal, FirstLetter, FirstKeepLetter, Finals:
 			// 去掉声调: a1 -> a
 			m = reTone2.ReplaceAllString(symbol, "$1")
 		case Tone2, FinalsTone2, Tone3, FinalsTone3:
@@ -180,7 +181,7 @@ func toFixed(p string, a Args) string {
 	}
 	switch a.Style {
 	// 首字母
-	case FirstLetter:
+	case FirstLetter, FirstKeepLetter:
 		py = py[:1]
 	// 韵母
 	case Finals, FinalsTone, FinalsTone2, FinalsTone3:
@@ -231,6 +232,9 @@ func Pinyin(s string, a Args) [][]string {
 	pys := [][]string{}
 	for _, r := range s {
 		py := SinglePinyin(r, a)
+		if a.Style == FirstKeepLetter && IsNumberOrLetter(r) {
+			py = append(py, string(r))
+		}
 		if len(py) > 0 {
 			pys = append(pys, py)
 		}
@@ -272,4 +276,18 @@ func LazyConvert(s string, a *Args) []string {
 		a = &args
 	}
 	return LazyPinyin(s, *a)
+}
+
+// 数字或字母
+func IsNumberOrLetter(n int32) bool {
+	switch {
+	case n >= 48 && n <= 57: // 数字
+		return true
+	case n >= 65 && n <= 90: // 大写字母
+		return true
+	case n >= 97 && n <= 122: // 小写字母
+		return true
+	default:
+		return false
+	}
 }
