@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.15.0] (2019-04-06)
+
+* **Changed** 使用 [pinyin-data][pinyin-data] v0.7.0 的拼音数据
+
 
 ## [0.14.0] (2018-08-05)
 
