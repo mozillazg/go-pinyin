@@ -14,7 +14,7 @@ gen_pinyin_dict:
 
 .PHONY: lint
 lint:
-	gofmt -s -w . pinyin _tools
+	gofmt -s -w . cmd/pinyin _tools
 	golint .
-	golint pinyin
+	golint cmd/pinyin
 	golint _tools
