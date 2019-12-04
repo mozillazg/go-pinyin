@@ -7,9 +7,9 @@ import (
 )
 
 var (
-	splacesRegexp    = regexp.MustCompile("[ ]+")
-	allowCharsRegexp = regexp.MustCompile("[a-zA-Z0-9\\.,\\?\\!;\\(\\)\\[\\]\\&\\=\\-_@ ]")
-	hansMarks        = map[string]string{
+	splacesRegexp    = regexp.MustCompile(`[\s]+`)
+	allowCharsRegexp = regexp.MustCompile(`[a-zA-Z0-9\.,\?\!;\(\)\[\]\&\=\-_@\s]`)
+	hansSymbols      = map[string]string{
 		"？": "?",
 		"！": "!",
 		"：": ":",
@@ -40,8 +40,8 @@ func ParagraphPinyin(p string) (s string) {
 			if allowCharsRegexp.MatchString(char) {
 				s += char
 			} else {
-				if hansMarks[char] != "" {
-					s += hansMarks[char]
+				if hansSymbols[char] != "" {
+					s += hansSymbols[char]
 				}
 			}
 		}
