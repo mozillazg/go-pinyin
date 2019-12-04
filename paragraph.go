@@ -7,8 +7,8 @@ import (
 )
 
 var (
-	splacesRegexp    = regexp.MustCompile("\\s+")
-	allowCharsRegexp = regexp.MustCompile("[a-zA-Z0-9\\.,\\?\\!;\\(\\)\\[\\]\\&\\=\\-_@\\s]")
+	splacesRegexp    = regexp.MustCompile("[ ]+")
+	allowCharsRegexp = regexp.MustCompile("[a-zA-Z0-9\\.,\\?\\!;\\(\\)\\[\\]\\&\\=\\-_@ ]")
 	hansMarks        = map[string]string{
 		"？": "?",
 		"！": "!",
@@ -50,16 +50,16 @@ func ParagraphPinyin(p string) (s string) {
 	// 去连续两个空格
 	s = splacesRegexp.ReplaceAllString(s, " ")
 	// 去掉 , . ? 前面的空格
-	s = strings.ReplaceAll(s, " ,", ",")
-	s = strings.ReplaceAll(s, " .", ".")
-	s = strings.ReplaceAll(s, " ?", "?")
-	s = strings.ReplaceAll(s, " ;", ";")
-	s = strings.ReplaceAll(s, " !", "!")
-	s = strings.ReplaceAll(s, "( ", "(")
-	s = strings.ReplaceAll(s, " )", ")")
-	s = strings.ReplaceAll(s, "[ ", "[")
-	s = strings.ReplaceAll(s, " ]", "]")
-	s = strings.ReplaceAll(s, " :", ":")
+	s = strings.Replace(s, " ,", ",", -1)
+	s = strings.Replace(s, " .", ".", -1)
+	s = strings.Replace(s, " ?", "?", -1)
+	s = strings.Replace(s, " ;", ";", -1)
+	s = strings.Replace(s, " !", "!", -1)
+	s = strings.Replace(s, "( ", "(", -1)
+	s = strings.Replace(s, " )", ")", -1)
+	s = strings.Replace(s, "[ ", "[", -1)
+	s = strings.Replace(s, " ]", "]", -1)
+	s = strings.Replace(s, " :", ":", -1)
 	s = strings.TrimSpace(s)
 	return
 }

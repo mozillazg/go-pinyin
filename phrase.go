@@ -20,7 +20,7 @@ func pinyinPhrase(s string) string {
 		match := phraseDict[word]
 		match = toFixed(match, paragraphOption)
 		if match != "" {
-			s = strings.ReplaceAll(s, word, " "+match+" ")
+			s = strings.Replace(s, word, " "+match+" ", 1)
 		}
 	}
 
