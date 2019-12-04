@@ -4,14 +4,14 @@ import (
 	"testing"
 )
 
-func BenchmarkParagraphPinyin(b *testing.B) {
+func BenchmarkParagraph(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		// about 0.06ms/op
-		ParagraphPinyin("这条恶狗真可恶 满身臭味 让人闻了就恶心 让人厌恶 像恶魔让人做恶梦")
+		Paragraph("这条恶狗真可恶 满身臭味 让人闻了就恶心 让人厌恶 像恶魔让人做恶梦")
 	}
 }
 
-func TestParagraphPinyin(t *testing.T) {
+func TestParagraph(t *testing.T) {
 	expects := map[string]string{
 		"天府大道北段18号高新国际广场A-3号!":      "tian fu da dao bei duan 18 hao gao xin guo ji guang chang A-3 hao!",
 		"人民银行旁边一行人abc字母路牌，平行宇宙发行股票": "ren min yin xing pang bian yi xing ren abc zi mu lu pai, ping xing yu zhou fa xing gu piao",
@@ -25,7 +25,7 @@ func TestParagraphPinyin(t *testing.T) {
 	}
 
 	for source, expect := range expects {
-		actual := ParagraphPinyin(source)
+		actual := Paragraph(source)
 		if expect != actual {
 			t.Errorf("\nexpect: %s\nactual: %s\n", expect, actual)
 			break

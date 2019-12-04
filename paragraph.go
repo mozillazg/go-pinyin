@@ -27,8 +27,8 @@ var (
 	}
 )
 
-// ParagraphPinyin convert a Chinese paragraph into pinyin, including letters, numbers, symbols
-func ParagraphPinyin(p string) (s string) {
+// Paragraph convert a Chinese paragraph into pinyin, including letters, numbers, symbols
+func Paragraph(p string) (s string) {
 	p = pinyinPhrase(p)
 
 	for _, r := range p {

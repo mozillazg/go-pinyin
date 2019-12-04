@@ -135,3 +135,9 @@ func ExampleSlug() {
 	fmt.Println(pinyin.Slug(hans, a))
 	// Output: zhong-guo-ren
 }
+
+func ExampleParagraph() {
+	hans := "人民银行旁边一行人abc字母【路牌】，平行宇宙发行股票。"
+	fmt.Println(pinyin.Paragraph(hans))
+	// Output: ren min yin xing pang bian yi xing ren abc zi mu [lu pai], ping xing yu zhou fa xing gu piao.
+}
