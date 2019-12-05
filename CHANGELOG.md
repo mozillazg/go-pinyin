@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.16.0] (2019-12-05)
+
+* **NEW** 增加 ``func Paragraph(p string) string`` 用于便捷处理大段文字
+(thanks [@huacnlee] via [#37][#37])
+
 ## [0.15.0] (2019-04-06)
 
 * **Changed** 使用 [pinyin-data][pinyin-data] v0.7.0 的拼音数据
@@ -193,9 +198,11 @@
 
 [pinyin-data]: https://github.com/mozillazg/pinyin-data
 [@wdscxsj]: https://github.com/wdscxsj
+[@huacnlee]: https://github.com/huacnlee
 [#19]: https://github.com/mozillazg/go-pinyin/pull/19
 [#20]: https://github.com/mozillazg/go-pinyin/pull/20
 [#30]: https://github.com/mozillazg/go-pinyin/pull/30
+[#37]: https://github.com/mozillazg/go-pinyin/pull/37
 
 [0.1.1]: https://github.com/mozillazg/go-pinyin/compare/v0.1.0...v0.1.1
 [0.2.0]: https://github.com/mozillazg/go-pinyin/compare/v0.1.1...v0.2.0
@@ -213,3 +220,4 @@
 [0.13.0]: https://github.com/mozillazg/go-pinyin/compare/v0.12.0...v0.13.0
 [0.14.0]: https://github.com/mozillazg/go-pinyin/compare/v0.13.0...v0.14.0
 [0.15.0]: https://github.com/mozillazg/go-pinyin/compare/v0.14.0...v0.15.0
+[0.16.0]: https://github.com/mozillazg/go-pinyin/compare/v0.15.0...v0.16.0

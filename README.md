@@ -80,7 +80,7 @@ func main() {
 	// [zhong guo ren]
 
 	// 段落转换，支持完整支持多音字，保留符号
-	fmt.Println(pinyin.ParagraphPinyin("交给团长，告诉他我们给予期望。前线的供给一定要能自给自足！"))
+	fmt.Println(pinyin.Paragraph("交给团长，告诉他我们给予期望。前线的供给一定要能自给自足！"))
 	// jiao gei tuan zhang, gao su ta wo men ji yu qi wang. qian xian de gong ji yi ding yao neng zi ji zi zu!
 }
 ```
