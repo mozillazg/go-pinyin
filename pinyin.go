@@ -94,8 +94,8 @@ var finalExceptionsMap = map[string]string{
 	"ǔ": "ǚ",
 	"ù": "ǜ",
 }
-var reFinalExceptions = regexp.MustCompile("^(j|q|x)(ū|ú|ǔ|ù)$")
-var reFinal2Exceptions = regexp.MustCompile("^(j|q|x)u(\\d?)$")
+var reFinalExceptions = regexp.MustCompile(`^(j|q|x)(ū|ú|ǔ|ù)$`)
+var reFinal2Exceptions = regexp.MustCompile(`^(j|q|x)u(\d?)$`)
 
 // NewArgs 返回包含默认配置的 `Args`
 func NewArgs() Args {
