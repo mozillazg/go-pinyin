@@ -18,13 +18,16 @@ func pinyinPhrase(s string) string {
 	words := cutWords(s)
 	for _, word := range words {
 		match := phraseDict[word]
+		if match == "" {
+			match = phraseDictAddition[word]
+		}
+
 		match = toFixed(match, paragraphOption)
 		if match != "" {
 			s = strings.Replace(s, word, " "+match+" ", 1)
 		}
 	}
 
-	splacesRegexp.ReplaceAllString(s, " ")
-
 	return s
 }
+
