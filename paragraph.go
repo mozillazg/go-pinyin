@@ -33,8 +33,18 @@ func Paragraph(p string) (s string) {
 
 	for _, r := range p {
 		if unicode.Is(unicode.Han, r) {
-			s += " " + string(Pinyin(string(r), paragraphOption)[0][0]) + " "
+			// Han chars
+			result := Pinyin(string(r), paragraphOption)
+			if len(result) == 0 {
+				continue
+			}
+			if len(result[0]) == 0 {
+				continue
+			}
+
+			s += " " + string(result[0][0]) + " "
 		} else {
+			// Other chars
 			char := string(r)
 
 			if allowCharsRegexp.MatchString(char) {

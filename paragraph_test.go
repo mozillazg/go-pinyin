@@ -22,6 +22,9 @@ func TestParagraph(t *testing.T) {
 		"【腾讯(00700)拟2.305亿元出售应收账款 赚1720万元】": "[teng xun (00700) ni 2.305 yi yuan chu shou ying shou zhang kuan zhuan 1720 wan yuan]",
 		"地址：重庆市江北区重工业？":                     "di zhi: chong qing shi jiang bei qu zhong gong ye?",
 		"交给团长，告诉他我们给予期望。前线的供给一定要能自给自足！":     "jiao gei tuan zhang, gao su ta wo men ji yu qi wang. qian xian de gong ji yi ding yao neng zi ji zi zu!",
+		"abc123":  "abc123",
+		"義灬骉驫芔淼㴇": "yi biao biao biao hui miao she",
+		"":        "",
 	}
 
 	for source, expect := range expects {
