@@ -1,21 +1,17 @@
 language: go
 go:
-  - "1.7"
-  - "1.8"
   - "1.9.x"
   - "1.10.x"
   - "1.11.x"
   - "1.12.x"
-  - "master"
+  - "1.13.x"
 
 sudo: false
 
 before_install:
   - if ! go get code.google.com/p/go.tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
-  - go get github.com/mattn/go-isatty
   - go get github.com/axw/gocov/gocov
   - go get github.com/mattn/goveralls
-  - go get github.com/yanyiwu/gojieba
 
 script:
   - go run cmd/pinyin/main.go abc
@@ -23,9 +19,3 @@ script:
   - echo "abc" | go run cmd/pinyin/main.go
   - echo "abc" > abc.txt && go run cmd/pinyin/main.go < abc.txt
   - $HOME/gopath/bin/goveralls -service=travis-ci -v -package .
-
-matrix:
-  allow_failures:
-    - go: "1.7"
-    - go: "1.8"
-    - go: master
