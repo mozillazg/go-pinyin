@@ -1,3 +1,6 @@
 [submodule "_tools/pinyin-data"]
 	path = _tools/pinyin-data
 	url = https://github.com/mozillazg/pinyin-data.git
+[submodule "_tools/phrase-data"]
+	path = _tools/phrase-data
+	url = https://github.com/hotoo/pinyin.git
