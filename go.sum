@@ -2,5 +2,7 @@ github.com/mattn/go-isatty v0.0.10 h1:qxFzApOv4WsAL965uUPIsXzAKCZxN2p9UqdhFS4ZW1
 github.com/mattn/go-isatty v0.0.10/go.mod h1:qgIWMr58cqv1PHHyhnkY9lrL7etaEgOFcMEpPG5Rm84=
 github.com/yanyiwu/gojieba v1.1.0 h1:rx+kNP0L7zn+4Zyo1d8aLCfXt3BmIkWQ26FCbGnw1bc=
 github.com/yanyiwu/gojieba v1.1.0/go.mod h1:0AAj9tOG6WWXQ5FNffl4ruBy/hP7bHl2gs+YiDi1aYs=
+github.com/yanyiwu/gojieba v1.1.1 h1:sOQfoYuURTpqwspL9oasDgR69WFNb6A6eq4l/bnrBuw=
+github.com/yanyiwu/gojieba v1.1.1/go.mod h1:54wkP7sMJ6bklf7yPl6F+JG71dzVUU1WigZbR47nGdY=
 golang.org/x/sys v0.0.0-20191008105621-543471e840be h1:QAcqgptGM8IQBC9K/RC4o+O9YmqEm0diQn9QmZw/0mU=
 golang.org/x/sys v0.0.0-20191008105621-543471e840be/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
