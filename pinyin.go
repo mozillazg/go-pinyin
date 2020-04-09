@@ -7,7 +7,7 @@ import (
 
 // Meta
 const (
-	Version   = "0.16.0"
+	Version   = "0.15.0"
 	Author    = "mozillazg, 闲耘"
 	License   = "MIT"
 	Copyright = "Copyright (c) 2016 mozillazg, 闲耘"
@@ -94,8 +94,8 @@ var finalExceptionsMap = map[string]string{
 	"ǔ": "ǚ",
 	"ù": "ǜ",
 }
-var reFinalExceptions = regexp.MustCompile(`^(j|q|x)(ū|ú|ǔ|ù)$`)
-var reFinal2Exceptions = regexp.MustCompile(`^(j|q|x)u(\d?)$`)
+var reFinalExceptions = regexp.MustCompile("^(j|q|x)(ū|ú|ǔ|ù)$")
+var reFinal2Exceptions = regexp.MustCompile("^(j|q|x)u(\\d?)$")
 
 // NewArgs 返回包含默认配置的 `Args`
 func NewArgs() Args {

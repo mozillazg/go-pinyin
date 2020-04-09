@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.17.0] (2020-04-09)
+
+* **Changed** 因为依赖的 gojieba 经常出现安装异常，撤销 v0.16.0 的修改，撤销后 v0.17.0 的代码跟 v0.15.0 基本是一样的。
+  如果有需要使用 v0.16.0 新增的 ``func Paragraph(p string) string`` 功能的请使用 v0.16.0 版本或者通过 v0.16.0 中相关代码实现类似的需求。
+
+
 ## [0.16.0] (2019-12-05)
 
 * **NEW** 增加 ``func Paragraph(p string) string`` 用于便捷处理大段文字
@@ -221,3 +227,5 @@
 [0.14.0]: https://github.com/mozillazg/go-pinyin/compare/v0.13.0...v0.14.0
 [0.15.0]: https://github.com/mozillazg/go-pinyin/compare/v0.14.0...v0.15.0
 [0.16.0]: https://github.com/mozillazg/go-pinyin/compare/v0.15.0...v0.16.0
+[0.17.0]: https://github.com/mozillazg/go-pinyin/compare/v0.16.0...v0.17.0
+
