@@ -10,12 +10,7 @@ test:
 
 .PHONY: gen_pinyin_dict
 gen_pinyin_dict:
-	@go run _tools/gen_pinyin_dict/main.go _tools/pinyin-data/pinyin.txt pinyin_dict.go
-
-.PHONY: gen_phrase_dict
-gen_phrase_dict:
-	@go run _tools/gen_phrase_dict/main.go _tools/phrase-data/data/phrases-dict.js phrase_dict.go
-	@goreturns -w phrase_dict.go
+	@go run _tools/gen_pinyin_dict.go _tools/pinyin-data/pinyin.txt pinyin_dict.go
 
 .PHONY: lint
 lint:
