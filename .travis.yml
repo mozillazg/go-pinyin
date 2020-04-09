@@ -6,15 +6,17 @@ go:
   - '1.10.x'
   - '1.11.x'
   - '1.12.x'
+  - '1.13.x'
+  - '1.14.x'
   - 'master'
 
 sudo: false
 
 before_install:
   - if ! go get code.google.com/p/go.tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
-  - go get github.com/mattn/go-isatty
   - go get github.com/axw/gocov/gocov
   - go get github.com/mattn/goveralls
+  - go get ./cmd/pinyin
 
 script:
   - go run cmd/pinyin/main.go abc
