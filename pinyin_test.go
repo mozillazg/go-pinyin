@@ -390,3 +390,18 @@ func TestLazyConvert(t *testing.T) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 }
+
+func TestPinyin_fallback_issue_35(t *testing.T) {
+	a := NewArgs()
+	a.Separator = ""
+	a.Style = FirstLetter
+	a.Fallback = func(r rune, a Args) []string {
+		return []string{string(r)}
+	}
+	var s = "重。,a庆"
+	v := Pinyin(s, a)
+	expect := [][]string{{"z"}, {"。"}, {","}, {"a"}, {"q"}}
+	if !reflect.DeepEqual(v, expect) {
+		t.Errorf("Expected %s, got %s", expect, v)
+	}
+}
