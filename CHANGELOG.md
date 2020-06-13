@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.18.0] (2020-mm-dd)
+## [0.18.0] (2020-06-13)
 * **Changed** 使用 [pinyin-data][pinyin-data] v0.9.0 的拼音数据
 * **Bugfixed** 修复自定义的 Fallback 函数可能会导致结果乱码的问题 Fixes [#35]
 
@@ -232,4 +232,4 @@
 [0.15.0]: https://github.com/mozillazg/go-pinyin/compare/v0.14.0...v0.15.0
 [0.16.0]: https://github.com/mozillazg/go-pinyin/compare/v0.15.0...v0.16.0
 [0.17.0]: https://github.com/mozillazg/go-pinyin/compare/v0.16.0...v0.17.0
-
+[0.18.0]: https://github.com/mozillazg/go-pinyin/compare/v0.17.0...v0.18.0
