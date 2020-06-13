@@ -96,10 +96,10 @@ func ExamplePinyin_fallbackCustom1() {
 	hans := "中国人abc"
 	a := pinyin.NewArgs()
 	a.Fallback = func(r rune, a pinyin.Args) []string {
-		return []string{string(r + 1)}
+		return []string{string(r)}
 	}
 	fmt.Println(pinyin.Pinyin(hans, a))
-	// Output: [[zhong] [guo] [ren] [b] [c] [d]]
+	// Output: [[zhong] [guo] [ren] [a] [b] [c]]
 }
 
 func ExamplePinyin_fallbackCustom2() {

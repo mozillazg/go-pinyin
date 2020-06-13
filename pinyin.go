@@ -181,7 +181,7 @@ func toFixed(p string, a Args) string {
 	switch a.Style {
 	// 首字母
 	case FirstLetter:
-		py = py[:1]
+		py = string([]rune(py)[0])
 	// 韵母
 	case Finals, FinalsTone, FinalsTone2, FinalsTone3:
 		// 转换为 []rune unicode 编码用于获取第一个拼音字符
@@ -219,7 +219,7 @@ func SinglePinyin(r rune, a Args) []string {
 	}
 	if len(pys) > 0 {
 		if !a.Heteronym {
-			pys = pys[:1]
+			pys = []string{pys[0]}
 		}
 		return applyStyle(pys, a)
 	}
