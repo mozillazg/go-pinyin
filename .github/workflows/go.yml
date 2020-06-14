@@ -45,4 +45,3 @@ jobs:
         go run cmd/pinyin/main.go 测试
         go run cmd/pinyin/main.go -s zhao 测试
         echo 测试 | go run cmd/pinyin/main.go
-        echo 测试 > abc.txt && go run cmd/pinyin/main.go < abc.txt
