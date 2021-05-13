@@ -72,6 +72,8 @@ type Args struct {
 	// 处理没有拼音的字符（默认忽略没有拼音的字符）
 	// 函数返回的 slice 的长度为0 则表示忽略这个字符
 	Fallback func(r rune, a Args) []string
+	// 传入替代词库
+	ReplaceMap map[int]string
 }
 
 // Style 默认配置：风格
@@ -99,7 +101,7 @@ var reFinal2Exceptions = regexp.MustCompile("^(j|q|x)u(\\d?)$")
 
 // NewArgs 返回包含默认配置的 `Args`
 func NewArgs() Args {
-	return Args{Style, Heteronym, Separator, Fallback}
+	return Args{Style, Heteronym, Separator, Fallback, nil}
 }
 
 // 获取单个拼音中的声母
@@ -209,6 +211,9 @@ func applyStyle(p []string, a Args) []string {
 func SinglePinyin(r rune, a Args) []string {
 	if a.Fallback == nil {
 		a.Fallback = Fallback
+	}
+	if a.ReplaceMap != nil {
+		PinyinDict = a.ReplaceMap
 	}
 	value, ok := PinyinDict[int(r)]
 	pys := []string{}

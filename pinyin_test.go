@@ -405,3 +405,16 @@ func TestPinyin_fallback_issue_35(t *testing.T) {
 		t.Errorf("Expected %s, got %s", expect, v)
 	}
 }
+
+func TestPinyin_replaceMap_issue_53(t *testing.T){
+	a := NewArgs()
+	a.ReplaceMap = map[int]string{
+		0x3007:"quán", //改变〇的读音
+	}
+	var s = "〇"
+	v := Pinyin(s, a)
+	expect := [][]string{{"quan"}}
+	if !reflect.DeepEqual(v, expect) {
+		t.Errorf("Expected %s, got %s", expect, v)
+	}
+}
