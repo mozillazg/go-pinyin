@@ -1,7 +1,7 @@
 go-pinyin
 =========
 
-[![Build Status](https://github.com/mozillazg/go-pinyin/actions/workflows/go.yml/badge.svg?branch=master)](https://github.com/mozillazg/go-pinyin/actions/workflows/ci.yml)
+[![Build Status](https://github.com/mozillazg/go-pinyin/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/mozillazg/go-pinyin/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/mozillazg/go-pinyin/badge.svg?branch=master)](https://coveralls.io/r/mozillazg/go-pinyin?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mozillazg/go-pinyin)](https://goreportcard.com/report/github.com/mozillazg/go-pinyin)
 [![GoDoc](https://godoc.org/github.com/mozillazg/go-pinyin?status.svg)](https://godoc.org/github.com/mozillazg/go-pinyin)
