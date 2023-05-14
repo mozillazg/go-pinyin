@@ -43,7 +43,7 @@ jobs:
 
     - name: Test cmd
       run: |
-        go install ./cli/pinyin || go get ./cli/pinyin
-        go run cli/pinyin/main.go 测试
-        go run cli/pinyin/main.go -s zhao 测试
-        echo 测试 | go run cli/pinyin/main.go
+        cd cli/pinyin/
+        go run ./main.go 测试
+        go run ./main.go -s zhao 测试
+        echo 测试 | go run ./main.go

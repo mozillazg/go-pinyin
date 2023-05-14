@@ -13,17 +13,17 @@ Installation
 ------------
 
 ```
-go get -u github.com/mozillazg/go-pinyin
+go get github.com/mozillazg/go-pinyin
 ```
 
 install CLI tool:
 
 ```
 # go version>=1.17
-go install github.com/mozillazg/go-pinyin/cmd/pinyin@latest
+go install github.com/mozillazg/go-pinyin/cli/pinyin@latest
 
 # go version<1.17
-go get -u github.com/mozillazg/go-pinyin/cmd/pinyin
+go get -u github.com/mozillazg/go-pinyin/cli/pinyin
 
 $ pinyin 中国人
 zhōng guó rén
