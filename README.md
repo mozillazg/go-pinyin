@@ -70,7 +70,7 @@ func main() {
 	a = pinyin.NewArgs()
 	a.Heteronym = true
 	fmt.Println(pinyin.Pinyin(hans, a))
-	// [[zhong zhong] [guo] [ren]]
+	// [[zhong] [guo] [ren]]
 	a.Style = pinyin.Tone2
 	fmt.Println(pinyin.Pinyin(hans, a))
 	// [[zho1ng zho4ng] [guo2] [re2n]]
