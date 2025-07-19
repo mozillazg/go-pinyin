@@ -10,6 +10,11 @@ on:
     - master
     - develop
 
+
+permissions:
+  contents: read
+
+
 jobs:
 
   build:
@@ -17,11 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go-version: [1.17, 1.18, 1.19, '1.20']
+        go-version: [1.17, 1.18, 1.19, '1.20', '1.21', '1.22', '1.23', '1.24']
     steps:
 
     - name: Set up Go
-      uses: actions/setup-go@v3
+      uses: actions/setup-go@v4
       with:
         go-version: ${{ matrix.go-version }}
       env:
@@ -29,7 +34,7 @@ jobs:
       id: go
 
     - name: Check out code into the Go module directory
-      uses: actions/checkout@v3
+      uses: actions/checkout@v5
 
     - name: Get dependencies
       run: |
