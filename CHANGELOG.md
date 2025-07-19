@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0] (2025-07-19)
+
+* **Changed** 使用 [pinyin-data][pinyin-data] v0.15.0 的拼音数据。
+* **Changed** 在启用多音字模式时，去除返回结果中的重复拼音。
+  (thanks [@cara4e] via [#62][#62])
+
+
 ## [0.20.0] (2023-05-14)
 
 * **Changed** 使用 [pinyin-data][pinyin-data] v0.13.0 的拼音数据
@@ -219,10 +226,13 @@
 [pinyin-data]: https://github.com/mozillazg/pinyin-data
 [@wdscxsj]: https://github.com/wdscxsj
 [@huacnlee]: https://github.com/huacnlee
+[@cara4e]: https://github.com/cara4e
+
 [#19]: https://github.com/mozillazg/go-pinyin/pull/19
 [#20]: https://github.com/mozillazg/go-pinyin/pull/20
 [#30]: https://github.com/mozillazg/go-pinyin/pull/30
 [#37]: https://github.com/mozillazg/go-pinyin/pull/37
+[#62]: https://github.com/mozillazg/go-pinyin/pull/62
 [#35]: https://github.com/mozillazg/go-pinyin/issues/35
 
 [0.1.1]: https://github.com/mozillazg/go-pinyin/compare/v0.1.0...v0.1.1
@@ -246,3 +256,4 @@
 [0.18.0]: https://github.com/mozillazg/go-pinyin/compare/v0.17.0...v0.18.0
 [0.19.0]: https://github.com/mozillazg/go-pinyin/compare/v0.18.0...v0.19.0
 [0.20.0]: https://github.com/mozillazg/go-pinyin/compare/v0.19.0...v0.20.0
+[0.21.0]: https://github.com/mozillazg/go-pinyin/compare/v0.20.0...v0.21.0

@@ -135,7 +135,7 @@ func TestPinyin(t *testing.T) {
 		{
 			Args{Heteronym: true},
 			[][]string{
-				{"zhong", "zhong"},
+				{"zhong"},
 				{"guo"},
 				{"ren"},
 			},
@@ -262,7 +262,7 @@ func TestFallback(t *testing.T) {
 				},
 			},
 			[][]string{
-				{"zhong", "zhong"},
+				{"zhong"},
 				{"guo"},
 				{"ren"},
 				{"la", "wo"},

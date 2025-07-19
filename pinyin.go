@@ -7,7 +7,7 @@ import (
 
 // Meta
 const (
-	Version   = "0.20.0"
+	Version   = "0.21.0"
 	Author    = "mozillazg, 闲耘"
 	License   = "MIT"
 	Copyright = "Copyright (c) 2016 mozillazg, 闲耘"
@@ -199,8 +199,13 @@ func toFixed(p string, a Args) string {
 
 func applyStyle(p []string, a Args) []string {
 	newP := []string{}
+	seen := make(map[string]struct{})
 	for _, v := range p {
-		newP = append(newP, toFixed(v, a))
+		v = toFixed(v, a)
+		if _, ok := seen[v]; !ok {
+			newP = append(newP, v)
+			seen[v] = struct{}{}
+		}
 	}
 	return newP
 }
