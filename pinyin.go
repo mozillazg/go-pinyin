@@ -47,11 +47,11 @@ var initialArray = strings.Split(
 
 // 所有带声调的字符
 var rePhoneticSymbolSource = func(m map[string]string) string {
-	s := ""
+	var sb strings.Builder
 	for k := range m {
-		s = s + k
+		sb.WriteString(k)
 	}
-	return s
+	return sb.String()
 }(phoneticSymbol)
 
 // 匹配带声调字符的正则表达式
