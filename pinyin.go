@@ -198,8 +198,29 @@ func toFixed(p string, a Args) string {
 }
 
 func applyStyle(p []string, a Args) []string {
-	newP := []string{}
-	seen := make(map[string]struct{})
+	if len(p) == 1 {
+		return []string{toFixed(p[0], a)}
+	}
+
+	newP := make([]string, 0, len(p))
+	if len(p) <= 16 {
+		for _, v := range p {
+			v = toFixed(v, a)
+			found := false
+			for _, existing := range newP {
+				if existing == v {
+					found = true
+					break
+				}
+			}
+			if !found {
+				newP = append(newP, v)
+			}
+		}
+		return newP
+	}
+
+	seen := make(map[string]struct{}, len(p))
 	for _, v := range p {
 		v = toFixed(v, a)
 		if _, ok := seen[v]; !ok {
