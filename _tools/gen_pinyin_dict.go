@@ -14,8 +14,8 @@ type cmdArgs struct {
 	outputFile string
 }
 
-func genCode(inFile *os.File, outFile *os.File) {
-	rd := bufio.NewReader(inFile)
+func genCode(r io.Reader, w io.Writer) {
+	rd := bufio.NewReader(r)
 	output := `package pinyin
 
 // PinyinDict is data map
@@ -45,10 +45,12 @@ var PinyinDict = map[int]string{
 		lines = append(lines, fmt.Sprintf("\t%s: \"%s\",", hexCode, pinyin))
 	}
 
-	output += strings.Join(lines, "\n")
-	output += "\n}\n"
-	outFile.WriteString(output)
-	return
+	if len(lines) > 0 {
+		output += strings.Join(lines, "\n")
+		output += "\n"
+	}
+	output += "}\n"
+	io.WriteString(w, output)
 }
 
 func parseCmdArgs() cmdArgs {
