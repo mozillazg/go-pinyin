@@ -6,6 +6,19 @@ import (
 	"github.com/mozillazg/go-pinyin"
 )
 
+// ExampleName 展示单姓、复姓的姓名转换，以及带声调的输出。
+func ExampleName() {
+	a := pinyin.NewArgs()
+	fmt.Println(pinyin.Name("单明", a))
+	fmt.Println(pinyin.Name("万俟明", a))
+	a.Style = pinyin.Tone
+	fmt.Println(pinyin.Name("单明", a))
+	// Output:
+	// [[shan] [ming]]
+	// [[mo] [qi] [ming]]
+	// [[shàn] [míng]]
+}
+
 func ExampleConvert() {
 	hans := "中国人"
 	fmt.Println("default:", pinyin.Convert(hans, nil))
